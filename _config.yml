@@ -3,3 +3,5 @@ plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 title: CTF小白成长
 description: 记录CTF学习过程的个人笔记
+markdown: kramdown
+baseurl: ""
