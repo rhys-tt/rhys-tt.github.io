@@ -1,0 +1,174 @@
+/* 1. 从谷歌字体库偷偷“进货”两款高级字体 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Zhi+Mang+Xing&display=swap');
+
+/* 2. 精准狙击主页的打字机副标题 (#subtitle) */
+#subtitle {
+    /* 默认使用：思源宋体。如果你想换成狂草，就把下面这行改成 font-family: 'Zhi Mang Xing', cursive; */
+    font-family: 'Zhi Mang Xing', cursive;
+    
+    font-size: 1.3rem;      /* 字体稍微放大一点，更有气势 */
+    font-weight: 500;       /* 字重，控制粗细 */
+    letter-spacing: 3px;    /* 字间距拉开一点点，高级感马上就出来了 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 加一点点低调的阴影，让字浮起来 */
+}
+
+/* (可选) 把打字机的光标也稍微改大一点点，配合新字体 */
+#subtitle::after {
+    font-size: 1.4rem;
+}
+/* =======================================
+   超超专属：高级自定义前言框样式
+======================================= */
+
+/* 整体容器：使用 Flexbox 布局保证图标和文字完美对齐 */
+.chao-preface-box {
+    display: flex;
+    align-items: flex-start;
+    margin: 25px 0;
+    padding: 20px 25px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #f8fbff, #f0f5ff); /* 极具高级感的浅蓝渐变背景 */
+    box-shadow: 0 8px 16px rgba(0, 50, 150, 0.05); /* 柔和的高级阴影 */
+    border-left: 5px solid #4a90e2; /* 左侧点缀一条科技蓝粗线 */
+    transition: all 0.3s ease;
+}
+
+/* 鼠标悬停特效：框框微微浮起 */
+.chao-preface-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px rgba(0, 50, 150, 0.08);
+}
+
+/* 左侧图标样式 */
+.chao-preface-box .box-icon {
+    font-size: 1.8rem;
+    margin-right: 18px;
+    margin-top: 2px;
+}
+
+/* 右侧正文样式 */
+.chao-preface-box .box-content {
+    flex: 1;
+    color: #333333;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* 标题样式：加粗加点颜色 */
+.chao-preface-box .box-content strong {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+/* 🌙 夜间模式完美适配（当博客切到暗黑模式时自动生效） */
+[data-theme='dark'] .chao-preface-box {
+    background: linear-gradient(145deg, #2a2d34, #24262b);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border-left: 5px solid #5ca0f2;
+}
+[data-theme='dark'] .chao-preface-box .box-content {
+    color: #dcdcdc;
+}
+[data-theme='dark'] .chao-preface-box .box-content strong {
+    color: #ffffff;
+}
+/* Vercel 极简风前言框 */
+.vercel-callout {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    background-color: #fafafa;
+    color: #111;
+    display: flex;
+    gap: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+}
+.vercel-callout svg {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: #0070f3; /* Vercel 标志性的克制蓝 */
+}
+.vercel-callout-content { line-height: 1.6; font-size: 0.95rem; }
+.vercel-callout-title { font-weight: 600; margin-bottom: 6px; font-size: 1.05rem; }
+
+/* 夜间模式适配 */
+[data-theme='dark'] .vercel-callout {
+    background-color: #000000;
+    border-color: #333333;
+    color: #ededed;
+}
+ /* <div class="vercel-callout">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    <div class="vercel-callout-content">
+        <div class="vercel-callout-title">前言导读</div>
+        作为网安专业的学生，最近越发感受到底层原理的重要性。继磕完 C++ 和算法之后，这段时间开始向更深层的 AI 领域进发。这篇文章是我近期死磕 CNN 架构和底层数学推导的阶段性复盘。
+    </div>
+</div> */
+/* 苹果毛玻璃前言框 */
+.glass-callout {
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    position: relative;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+/* 左侧优雅的渐变高亮条 */
+.glass-callout::before {
+    content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 4px;
+    background: linear-gradient(180deg, #ff2a5f, #ff719a);
+}
+.glass-callout strong { font-size: 1.1rem; color: #333; margin-bottom: 8px; display: block; }
+.glass-callout p { margin: 0; color: #555; line-height: 1.7; font-size: 0.95rem; }
+
+[data-theme='dark'] .glass-callout {
+    background: rgba(20, 20, 20, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+[data-theme='dark'] .glass-callout strong { color: #eee; }
+[data-theme='dark'] .glass-callout p { color: #ccc; }
+/* <div class="glass-callout">
+    <strong>✨ 卷首语：万丈高楼平地起</strong>
+    <p>这篇文章是我近期死磕 CNN 架构和底层数学推导的阶段性复盘。分享出来，希望能给同样在啃 AI 底层的师傅们一点参考，我们顶峰相见！</p>
+</div> */
+/* 骇客终端前言框 */
+.terminal-callout {
+    margin: 2.5rem 0 2rem 0;
+    padding: 1.5rem;
+    background-color: #0d1117; /* GitHub 暗黑主题同款背景 */
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    position: relative;
+    font-family: 'Courier New', Courier, monospace; /* 强制等宽字体 */
+    color: #c9d1d9;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.terminal-callout::before {
+    content: "root@chaochao:~# ./preface.sh";
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    background-color: #0d1117;
+    padding: 0 10px;
+    color: #58a6ff; /* 终端高亮蓝 */
+    font-weight: bold;
+    font-size: 0.85rem;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+}
+.terminal-callout p { margin: 0; line-height: 1.6; font-size: 0.95rem; }
+.terminal-callout .cursor { display: inline-block; width: 8px; height: 15px; background: #58a6ff; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px; }
+@keyframes blink { 50% { opacity: 0; } }
+/* <div class="terminal-callout">
+    <p>> Loading CNN mathematical derivation module... [OK]<br>
+    > Initializing preface sequence...<br><br>
+    这篇文章是我近期死磕 CNN 架构和底层数学推导的阶段性复盘。分享出来，希望能给各位师傅们一点参考，我们顶峰相见！<span class="cursor"></span></p>
+</div> */
