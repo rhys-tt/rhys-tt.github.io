@@ -8,7 +8,7 @@
     
     font-size: 1.3rem;      /* 字体稍微放大一点，更有气势 */
     font-weight: 500;       /* 字重，控制粗细 */
-    letter-spacing: 3px;    /* 字间距拉开一点点，高级感马上就出来了 */
+    letter-spacing: 3px;    /* 字间距拉开一点点 */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 加一点点低调的阴影，让字浮起来 */
 }
 
@@ -172,3 +172,7 @@
     > Initializing preface sequence...<br><br>
     这篇文章是我近期死磕 CNN 架构和底层数学推导的阶段性复盘。分享出来，希望能给各位师傅们一点参考，我们顶峰相见！<span class="cursor"></span></p>
 </div> */
+/* 给主页顶部大图加一个深色底板，图片加载出来前就不会刺眼 */
+#page-header.full_page {
+    background-color: #1a1a1a; /* 这是一个高级的深灰色，你可以自己换 */
+}
