@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>missing semester——shell practise | Rhys's Blog</title><meta name="author" content="Rhys"><meta name="copyright" content="Rhys"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="前言         最近打算用点时间把 The missing semester of your CS education 学了，补一补最基础的计算机知识，于是打算把练习写成博客记录一下。         本课程要求你使用类 Unix 的 Shell，如 Bash 或 ZSH 。若你在 Linux 或 macOS 上，无需额外设置。若你在 Windows 上">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>missing semester——shell practise | Rhys's Blog</title><meta name="author" content="Rhys"><meta name="copyright" content="Rhys"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="新开始最近打算用点时间把 The missing semester of your CS education 学一下，补一补最基础的计算机知识，于是打算把练习部分写成博客记录一下。   本课程要求你使用类 Unix 的 Shell，如 Bash 或 ZSH 。若你在 Linux 或 macOS 上，无需额外设置。若你在 Windows 上，请确认你用的不是 cmd.exe 或 PowerShell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="missing semester——shell practise">
 <meta property="og:url" content="http://example.com/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/index.html">
 <meta property="og:site_name" content="Rhys&#39;s Blog">
-<meta property="og:description" content="前言         最近打算用点时间把 The missing semester of your CS education 学了，补一补最基础的计算机知识，于是打算把练习写成博客记录一下。         本课程要求你使用类 Unix 的 Shell，如 Bash 或 ZSH 。若你在 Linux 或 macOS 上，无需额外设置。若你在 Windows 上">
+<meta property="og:description" content="新开始最近打算用点时间把 The missing semester of your CS education 学一下，补一补最基础的计算机知识，于是打算把练习部分写成博客记录一下。   本课程要求你使用类 Unix 的 Shell，如 Bash 或 ZSH 。若你在 Linux 或 macOS 上，无需额外设置。若你在 Windows 上，请确认你用的不是 cmd.exe 或 PowerShell">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/headhacker.png">
 <meta property="article:published_time" content="2026-05-13T17:10:35.000Z">
-<meta property="article:modified_time" content="2026-05-13T17:11:02.094Z">
+<meta property="article:modified_time" content="2026-05-14T05:10:34.322Z">
 <meta property="article:author" content="Rhys">
 <meta property="article:tag" content="missing semester">
 <meta property="article:tag" content="shell">
@@ -19,7 +19,7 @@
   "url": "http://example.com/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/",
   "image": "http://example.com/img/headhacker.png",
   "datePublished": "2026-05-13T17:10:35.000Z",
-  "dateModified": "2026-05-13T17:11:02.094Z",
+  "dateModified": "2026-05-14T05:10:34.322Z",
   "author": [
     {
       "@type": "Person",
@@ -158,26 +158,23 @@
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: 'missing semester——shell practise',
   isHighlightShrink: false,
-  isToc: false,
+  isToc: true,
   pageType: 'post'
-}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/headhacker.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/CTF%E9%A2%98%E8%A7%A3/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/background4.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Rhys's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">missing semester——shell practise</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/CTF%E9%A2%98%E8%A7%A3/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">missing semester——shell practise</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-13T17:10:35.000Z" title="发表于 2026-05-14 01:10:35">2026-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-13T17:11:02.094Z" title="更新于 2026-05-14 01:11:02">2026-05-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div class="vercel-callout">
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    <div class="vercel-callout-content">
-        <div class="vercel-callout-title" style="font-family: 'Noto Serif SC', serif;">前言</div>
-        最近打算用点时间把 The missing semester of your CS education 学了，补一补最基础的计算机知识，于是打算把练习写成博客记录一下。
-    </div>
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/headhacker.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/CTF%E9%A2%98%E8%A7%A3/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/background4.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Rhys's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">missing semester——shell practise</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/CTF%E9%A2%98%E8%A7%A3/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">missing semester——shell practise</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-13T17:10:35.000Z" title="发表于 2026-05-14 01:10:35">2026-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-14T05:10:34.322Z" title="更新于 2026-05-14 13:10:34">2026-05-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">29k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1:46分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="新开始"><a href="#新开始" class="headerlink" title="新开始"></a>新开始</h2><p>最近打算用点时间把 The missing semester of your CS education 学一下，补一补最基础的计算机知识，于是打算把练习部分写成博客记录一下。</p>
+<div class="q-box-badge" data-title="Q1">
+
+<p>本课程要求你使用类 Unix 的 <code>Shell</code>，如 <code>Bash</code> 或 <code>ZSH</code> 。若你在 Linux 或 macOS 上，无需额外设置。若你在 Windows 上，请确认你用的不是 cmd.exe 或 PowerShell；你可以使用 Windows Subsystem for Linux 或 Linux 虚拟机来获得 Unix 风格的命令行工具。要确认当前 <code>Shell</code> 是否合适，可运行 <code>echo $SHELL</code>；若输出类似 <code>/bin/bash</code> 或 <code>/usr/bin/zsh</code> ，就说明没问题。</p>
 </div>
 
-<ol>
-<li>本课程要求你使用类 Unix 的 <code>Shell</code>，如 <code>Bash</code> 或 <code>ZSH</code> 。若你在 Linux 或 macOS 上，无需额外设置。若你在 Windows 上，请确认你用的不是 cmd.exe 或 PowerShell；你可以使用 Windows Subsystem for Linux 或 Linux 虚拟机来获得 Unix 风格的命令行工具。要确认当前 <code>Shell</code> 是否合适，可运行 <code>echo $SHELL</code>；若输出类似 <code>/bin/bash</code> 或 <code>/usr/bin/zsh</code> ，就说明没问题。</li>
-</ol>
-<p>这里顺便说一下我的wsl艰难安装史。大概是在W4terCTF开赛前想起之前没安装wsl，每次开虚拟机切到linux系统还是太麻烦了，还占内存，于是开始动手安装，本以为一句 <code>wsl --install</code> ,再重启电脑就可以了，结果这只是痛苦的开始……，重启之后依旧显示linux下没有可用分发，我开始问ai我这是什么问题，于是查虚拟化开了没，需要的配置通通检查了一遍，没啥问题，再次重启–再次失败，还是没装上。又继续折腾，还把windows系统从家庭版升级到了专业版，然而呢，还是不行。当时还问了一下其他人，怎么别人一下子就装好了，我搞这么久还是不行?折腾一晚上无果就先放弃去打比赛了，最近闲下来又开始研究，但是这次学聪明了，直接给codex 带着<code>gpt5.5 xhigh</code>,刚开始codex还是跟我之前操作查了一通发现不行，跑了四五轮之后终于发现了问题…….</p>
+<p>这里顺便说一下我的wsl艰难安装史。大概是在W4terCTF开赛前想起之前没安装wsl，每次开虚拟机切到linux系统还是太麻烦了，还占内存，于是开始动手安装，本以为一句 <code>wsl --install</code> ,再重启电脑就可以了，结果这只是痛苦的开始……，重启之后依旧显示linux下没有可用分发，我开始问ai我这是什么问题，于是查虚拟化开了没，需要的配置通通检查了一遍，没啥问题，再次重启–再次失败，还是没装上。又继续折腾，还把windows系统从家庭版升级到了专业版，然而呢，还是不行。当时还问了一下其他人，怎么别人一下子就装好了，我搞这么久还是不行?折腾一晚上无果就先放弃去打比赛了，最近闲下来又开始研究，但是这次学聪明了，直接给codex 带着<code>gpt5.5 xhigh</code>，刚开始codex还是跟我之前操作查了一通发现不行，跑了四五轮之后终于发现了问题…….</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">这次 WSL 一直失败的真正原因大概是这样：</span><br><span class="line"></span><br><span class="line">WSL 程序本体其实已经在，但 Windows 的两个核心功能没成功启用：</span><br><span class="line">Microsoft-Windows-Subsystem-Linux 和 VirtualMachinePlatform</span><br><span class="line"></span><br><span class="line">每次重启时 Windows 都在提交这些功能，但失败后回滚，所以你看到：</span><br><span class="line">“我们无法完成这些更新，正在撤销更改”</span><br><span class="line"></span><br><span class="line">日志里的关键错误是：</span><br><span class="line">0x800f0922，底层是 NetSetupAI.dll 安装网络组件失败，报 ERROR_MOD_NOT_FOUND</span><br><span class="line"></span><br><span class="line">具体卡在安装 Hyper-V/WSL2 网络组件 ms_l1vhlwf，它是 WSL2 虚拟网络要用的组件。</span><br><span class="line"></span><br><span class="line">根因不是系统保护太强，也不是你的个人文件问题，而是 VMware 网络组件残留坏了：</span><br><span class="line">vmware_bridge 还在网络配置里，但它要调用的 vmnetbridge.dll 指向 C:\Program Files (x86)\VMware\...，那个位置文件不存在。Windows 安装 WSL2 网络组件时会通知所有网络组件，结果调用这个坏掉的 VMware 通知对象时失败，整个更新就回滚。</span><br></pre></td></tr></table></figure>
 
 <p>我想起来了，年初的时候感觉C盘快满了，我啥也不懂把C盘的Program Files想把文件移到D盘，当时没成功，我以为没啥影响。事实证明不要随便移动C盘的文件，血的教训。<br>总而言之，终于用上wsl了：<br><img src="/img/6464baef95b70a09558c7d97367002a1.png" alt="alt text"></p>
-<ol start="2">
-<li><code>ls</code> 的 <code>-l</code> 选项（flag）作用是什么？运行 <code>ls -l /</code> 并观察输出。每一行最前面的 10 个字符分别代表什么？（提示：<code>man ls</code>）</li>
-</ol>
+<div class="q-box-badge" data-title="Q2">
+
+<p><code>ls</code> 的 <code>-l</code> 选项（flag）作用是什么？运行 <code>ls -l /</code> 并观察输出。每一行最前面的 10 个字符分别代表什么？（提示：<code>man ls</code>）</p>
+</div>
+
 <p>ls -l 会以 <strong>长格式（long listing）</strong> 列出目录内容，不仅显示文件名，还会输出文件的详细元数据，包括权限、所有者、大小、修改时间等信息。<br><img src="/img/2d6f3be62f9bae162290f692cbce59c5.png"></p>
 <p>运行 ls -l &#x2F; 后，每一行开头的 10 个字符格式为：-rwxr-xr-x（示例），拆成 4 部分理解：</p>
 <table>
@@ -209,9 +206,11 @@
 <td align="left">同上，是系统中其他所有用户的权限</td>
 </tr>
 </tbody></table>
-<ol start="3">
-<li>在命令 <code>find ~/Downloads -type f -name &quot;*.zip&quot; -mtime +30</code> 中，<code>*.zip</code> 是一个 「glob」。什么是 <code>glob</code> ？新建一个测试目录并创建一些文件，试试 <code>ls *.txt 、ls file?.txt 、ls {a,b,c}.txt</code> 等模式。参见 Bash 手册中的 Pattern Matching 。</li>
-</ol>
+<div class="q-box-badge" data-title="Q3">
+
+<p>在命令 <code>find ~/Downloads -type f -name &quot;*.zip&quot; -mtime +30</code> 中，<code>*.zip</code> 是一个 「glob」。什么是 <code>glob</code> ？新建一个测试目录并创建一些文件，试试 <code>ls *.txt 、ls file?.txt 、ls {a,b,c}.txt</code> 等模式。参见 Bash 手册中的 Pattern Matching 。</p>
+</div>
+
 <p>glob 是 Shell 提供的模式匹配（通配符）功能，用来匹配文件名。</p>
 <p>先创建测试目录和文件：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> testglob &amp;&amp; <span class="built_in">cd</span> testglob</span><br><span class="line">touch a.txt b.txt c.txt file1.txt file2.txt fileab.txt test.zip</span><br></pre></td></tr></table></figure>
@@ -242,9 +241,11 @@
 <td align="left"><code>a.txt</code> <code>b.txt</code> <code>c.txt</code></td>
 </tr>
 </tbody></table>
-<ol start="4">
-<li>‘单引号’、”双引号” 和 $’ANSI 引号’ 有什么区别？写一条命令，输出一个同时包含字面量 $ 、! 和换行符的字符串。参见 Quoting 。</li>
-</ol>
+<div class="q-box-badge" data-title="Q4">
+
+<p>‘单引号’、”双引号” 和 $‘ANSI 引号’ 有什么区别？写一条命令，输出一个同时包含字面量 $ 、! 和换行符的字符串。参见 Quoting 。</p>
+</div>
+
 <p>写一条符合题目的命令：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> $&#x27;The price is $<span class="number">100</span>!\nThank you!&#x27;</span><br></pre></td></tr></table></figure>
 
@@ -278,9 +279,11 @@
 <td align="left">支持<code>\n</code>（换行）、<code>\t</code>（制表符）、<code>\xHH</code>（十六进制）等 ANSI 转义，同时保留单引号的字面性</td>
 </tr>
 </tbody></table>
-<ol start="5">
-<li><code>Shell</code> 有三条标准流：stdin（0）、stdout（1）、stderr（2）。运行 <code>ls /nonexistent /tmp</code> ，把 <code>stdout</code> 和 <code>stderr</code> 分别重定向到两个文件。你将如何把两者都重定向到同一个文件？参见 Redirections。</li>
-</ol>
+<div class="q-box-badge" data-title="Q5">
+
+<p><code>Shell</code> 有三条标准流：stdin（0）、stdout（1）、stderr（2）。运行 <code>ls /nonexistent /tmp</code> ，把 <code>stdout</code> 和 <code>stderr</code> 分别重定向到两个文件。你将如何把两者都重定向到同一个文件？参见 Redirections。</p>
+</div>
+
 <p>三个标准流的含义：</p>
 <ul>
 <li>stdin：标准输入，文件描述符 0</li>
@@ -301,19 +304,25 @@
 <li><code>&amp;1</code>指向 1 的位置（不是文件，是文件描述符）</li>
 </ul>
 <p>操作示意图：<br><img src="/img/4c60074f15ac3032b472024338b65f1f.png" alt="alt text"></p>
-<ol start="6">
-<li><code>$?</code> 保存上一条命令的退出状态（0 表示成功）。<code>&amp;&amp;</code> 仅在前一条成功时执行后一条；<code>||</code> 仅在前一条失败时执行后一条。写一个一行命令：仅当 <code>/tmp/mydir</code> 不存在时才创建它。参见 Exit Status 。</li>
-</ol>
+<div class="q-box-badge" data-title="Q6">
+
+<p><code>$?</code> 保存上一条命令的退出状态（0 表示成功）。<code>&amp;&amp;</code> 仅在前一条成功时执行后一条；<code>||</code> 仅在前一条失败时执行后一条。写一个一行命令：仅当 <code>/tmp/mydir</code> 不存在时才创建它。参见 Exit Status 。</p>
+</div>
+
 <p>命令：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test ! -d /tmp/mydir &amp;&amp; <span class="built_in">mkdir</span> /tmp/mydir</span><br></pre></td></tr></table></figure>
 <p>验证：<br><img src="/img/e45af8966501c6346c3f0c9ff92d58ab.png" alt="alt text"></p>
-<ol start="7">
-<li>为什么 <code>cd</code> 必须是 <code>Shell</code> 内建命令，而不能是独立程序？（提示：想想子进程能影响和不能影响父进程的哪些状态。）</li>
-</ol>
+<div class="q-box-badge" data-title="Q7">
+
+<p>为什么 <code>cd</code> 必须是 <code>Shell</code> 内建命令，而不能是独立程序？（提示：想想子进程能影响和不能影响父进程的哪些状态。）</p>
+</div>
+
 <p>当执行一个外部程序时，<code>Shel</code>l<code> 会创建一个子进程来运行它。子进程的工作目录是独立的，无法修改父进程（Shell）的工作目录。如果 cd 是外部程序，它修改的只是自己的工作目录，执行完就退出了，对 Shell 本身毫无影响。所以，</code>cd<code>必须作为</code>Shell<code>内建命令，直接运行在</code>Shell<code>进程内部，才能修改</code>Shell&#96; 的当前工作目录。</p>
-<ol start="8">
-<li>写一个脚本，接收文件名参数（$1），用 <code>test -f</code> 或 <code>[ -f ... ]</code> 检查该文件是否存在，并根据结果输出不同提示。参见 Bash Conditional Expressions 。</li>
-</ol>
+<div class="q-box-badge" data-title="Q8">
+
+<p>写一个脚本，接收文件名参数（$1），用 <code>test -f</code> 或 <code>[ -f ... ]</code> 检查该文件是否存在，并根据结果输出不同提示。参见 Bash Conditional Expressions 。</p>
+</div>
+
 <p>脚本：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收第一个参数作为文件名</span></span><br><span class="line">file=<span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查参数是否为空</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$file</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;用法: <span class="variable">$0</span> &lt;文件名&gt;&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查文件是否存在且为普通文件</span></span><br><span class="line"><span class="keyword">if</span> [ -f <span class="string">&quot;<span class="variable">$file</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;文件 &#x27;<span class="variable">$file</span>&#x27; 存在且是普通文件&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;文件 &#x27;<span class="variable">$file</span>&#x27; 不存在或不是普通文件&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 <ul>
@@ -328,21 +337,28 @@
 <li><code>+x</code>: 加上执行权限（x &#x3D; execute）</li>
 <li>check.sh: 要修改权限的文件</li>
 </ul>
-<ol start="9">
-<li>把上一题完成的脚本保存为文件（如 check.sh）。先运行 .&#x2F;check.sh somefile ，会发生什么？然后执行 chmod +x check.sh 再试一次。为什么这一步是必须的？（提示：比较 chmod 前后的 ls -l check.sh 输出）</li>
-</ol>
+<div class="q-box-badge" data-title="Q9">
+
+<p>把上一题完成的脚本保存为文件（如 check.sh）。先运行 .&#x2F;check.sh somefile ，会发生什么？然后执行 chmod +x check.sh 再试一次。为什么这一步是必须的？（提示：比较 chmod 前后的 ls -l check.sh 输出）</p>
+</div>
+
 <p>欸？刚才上一题好像就是保存成脚本再运行的……<br>如果没有<code>chmod +x check.sh</code>, 直接运行 .&#x2F;check.sh somefile,会报错：Permission denied（权限被拒绝），因为脚本文件默认没有可执行权限。</p>
 <p><img src="/img/297d3d3704230c0a9f668f7a16bc9dc3.png" alt="alt text"><br>可以看到运行完之后有了x权限。</p>
-<ol start="10">
-<li>在脚本的 set 选项（flag）里加入 -x 会发生什么？写个简单脚本试试并观察输出。参见 The Set Builtin 。</li>
-</ol>
+<div class="q-box-badge" data-title="Q10">
+
+<p>在脚本的 set 选项（flag）里加入 -x 会发生什么？写个简单脚本试试并观察输出。参见 The Set Builtin 。</p>
+</div>
+
 <p><code>set -x</code>会让 Shell 在执行每一条命令前，先把命令展开并打印出来（以 + 开头）。可以看到变量替换、命令替换后的真实执行内容，方便调试脚本。</p>
 <p>测试脚本：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -x  <span class="comment"># 开启调试模式</span></span><br><span class="line">name=<span class="string">&quot;testfile&quot;</span></span><br><span class="line"><span class="built_in">touch</span> <span class="string">&quot;<span class="variable">$name</span>.txt&quot;</span></span><br><span class="line"><span class="built_in">ls</span> -l <span class="string">&quot;<span class="variable">$name</span>.txt&quot;</span></span><br></pre></td></tr></table></figure>
 <p>测试：<br><img src="/img/89334147fb9a565249e62a488a365164.png" alt="alt text"><br>每一步的命令都会被打印出来，方便排查问题。</p>
-<ol start="11">
-<li>写一条命令，把文件复制为带当天日期的备份文件名（例如 notes.txt → notes_2026-01-12.txt）。（提示：$(date +%Y-%m-%d)）参见 Command Substitution 。<br>依次执行一下命令：</li>
-</ol>
+<div class="q-box-badge" data-title="Q11">
+
+<p>写一条命令，把文件复制为带当天日期的备份文件名（例如 notes.txt → notes_2026-01-12.txt）。（提示：<code>$(date +%Y-%m-%d)）</code>参见 <code>Command Substitution</code> 。</p>
+</div>
+
+<p>依次执行一下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先创建测试文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;test&quot;</span> &gt; notes.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行备份命令</span></span><br><span class="line"><span class="built_in">cp</span> notes.txt <span class="string">&quot;notes_<span class="subst">$(date +%Y-%m-%d)</span>.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看结果</span></span><br><span class="line"><span class="built_in">ls</span> notes*.txt</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>ls notes*txt</code>: 列出当前目录下所有名字以 <code>notes</code> 开头、以 <code>txt</code> 结尾的文件</li>
@@ -355,9 +371,11 @@
 </li>
 </ul>
 <p>测试结果：<br><img src="/img/991e522c59c19bad3f6d90436d1d59c9.png" alt="alt text"></p>
-<ol start="12">
-<li>修改讲义中的「复现偶尔才会失败的测试」脚本（flaky test），使它能够从命令行参数接收测试命令，而不是在脚本中写死 cargo test my_test。（提示：$1 或 $@）参见 Special Parameters 。</li>
-</ol>
+<div class="q-box-badge" data-title="Q12">
+
+<p>修改讲义中的「复现偶尔才会失败的测试」脚本（flaky test），使它能够从命令行参数接收测试命令，而不是在脚本中写死 cargo test my_test。（提示：<code>$1</code> 或 <code>$@</code>）参见 <code>Special Parameters</code> 。</p>
+</div>
+
 <p>修改后的脚本：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -euo pipefail</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查用户是否传入了测试命令</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;用法: <span class="variable">$0</span> &lt;测试命令&gt;&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;示例: <span class="variable">$0</span> &#x27;cargo test my_test&#x27;&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把所有命令行参数存到变量里（核心修改点）</span></span><br><span class="line">TEST_COMMAND=<span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 后台运行CPU压力测试</span></span><br><span class="line">stress --cpu 8 &amp;</span><br><span class="line">STRESS_PID=$!</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置日志文件</span></span><br><span class="line">LOGFILE=<span class="string">&quot;test_runs_<span class="subst">$(date +%s)</span>.log&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Logging to <span class="variable">$LOGFILE</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环运行测试，直到失败</span></span><br><span class="line">RUN=1</span><br><span class="line"><span class="keyword">while</span> <span class="variable">$TEST_COMMAND</span> &gt; <span class="string">&quot;<span class="variable">$LOGFILE</span>&quot;</span> 2&gt;&amp;1; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Run <span class="variable">$RUN</span> passed&quot;</span></span><br><span class="line">    ((RUN++))</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理CPU压力进程</span></span><br><span class="line"><span class="built_in">kill</span> <span class="variable">$STRESS_PID</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 报告失败信息</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Test failed on run <span class="variable">$RUN</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Last 20 lines of output:&quot;</span></span><br><span class="line"><span class="built_in">tail</span> -n 20 <span class="string">&quot;<span class="variable">$LOGFILE</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Full log: <span class="variable">$LOGFILE</span>&quot;</span></span><br></pre></td></tr></table></figure>
 <ul>
@@ -365,9 +383,11 @@
 <li><code>$@</code>: 是 Shell 特殊参数，代表所有命令行参数，相比 $1，$@ 能处理带空格、带选项的复杂命令，更通用</li>
 </ul>
 <p>测试结果：<br><img src="/img/bb33df1df74be01345fd1d5fe0a72197.png" alt="alt text"><br>自然是没有成功运行，但是脚本本身逻辑没问题。</p>
-<ol start="13">
-<li>使用管道找出你「home 目录」中最常见的 5 种文件扩展名。（提示：组合 find 、grep &#x2F; sed &#x2F; awk、sort、uniq -c 以及 head）</li>
-</ol>
+<div class="q-box-badge" data-title="Q13">
+
+<p>使用管道找出你「home 目录」中最常见的 5 种文件扩展名。（提示：组合 find 、grep &#x2F; sed &#x2F; awk、sort、uniq -c 以及 head）</p>
+</div>
+
 <p>用命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ~ -<span class="built_in">type</span> f | sed -nE <span class="string">&#x27;s/.*\.([^.]+)$/\1/p&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -nr | <span class="built_in">head</span> -5</span><br></pre></td></tr></table></figure>
 <ul>
@@ -394,9 +414,11 @@
 <li><code>head -5</code>: 只取前 5 行</li>
 </ul>
 <p>运行后显示：<br><img src="/img/ca0ee734603faf6bc0974e8f7d2b52b0.png" alt="alt text"><br>欸，为什么这些拓展名这么奇怪呢？<br>因为这些文件根本没有后缀，这些是 Linux 系统文件，它们没有 .txt .sh 这种后缀。~ 目录里大部分都是：系统隐藏文件、无后缀的配置文件、日志文件。<br>如果搜当前目录的话，结果会正常一点：<br><img src="/img/5753de8d4961dc0968ec806d2ce75921.png" alt="alt text"></p>
-<ol start="14">
-<li>xargs 会把 stdin 的每一行转换为命令参数。结合 find 和 xargs（不要用 find -exec），找出目录中所有 .sh 文件，并用 wc -l 统计每个文件行数。加分项：正确处理文件名中的空格。（提示：-print0 和 -0）参见 man xargs 。</li>
-</ol>
+<div class="q-box-badge" data-title="Q14">
+
+<p>xargs 会把 stdin 的每一行转换为命令参数。结合 find 和 xargs（不要用 find -exec），找出目录中所有 .sh 文件，并用 wc -l 统计每个文件行数。加分项：正确处理文件名中的空格。（提示：-print0 和 -0）参见 man xargs 。</p>
+</div>
+
 <p>执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.sh&quot;</span> -print0 | xargs -0 <span class="built_in">wc</span> -l</span><br></pre></td></tr></table></figure>
 <ul>
@@ -406,9 +428,11 @@
 <li>wc -l: word count，对每个传入的文件执行wc -l命令，统计文件的行数</li>
 </ul>
 <p>测试：<br><img src="/img/338eeea3b61167f2afbd9652c883ce51.png" alt="alt text"></p>
-<ol start="15">
-<li>使用 curl 获取 课程网站 的 HTML，并通过 grep 统计列出了多少讲。（提示：找出每讲课程名称在那份 HTML 中的共性；用 curl -s 关闭进度输出。）</li>
-</ol>
+<div class="q-box-badge" data-title="Q15">
+
+<p>使用 curl 获取 课程网站 的 HTML，并通过 grep 统计列出了多少讲。（提示：找出每讲课程名称在那份 HTML 中的共性；用 curl -s 关闭进度输出。）</p>
+</div>
+
 <p>主要到课程网站都是 <code>https://missing.csail.mit.edu/2026/xxxxx</code> 的格式，<br>用命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://missing.csail.mit.edu/2026/ | grep -c <span class="string">&#x27;href=&quot;/2026/&#x27;</span></span><br></pre></td></tr></table></figure>
 <ul>
@@ -417,9 +441,11 @@
 <li>‘href&#x3D;”&#x2F;2026&#x2F;‘: 匹配所有指向 &#x2F;2026&#x2F; 下课程页面的链接，这是每节课url链接的共性特征</li>
 </ul>
 <p>测试：<br><img src="/img/a10030fc9444639ce1369f144311b382.png" alt="alt text"><br>可以看到一共有九节课，希望五月可以学完（好多事啊qwq）</p>
-<ol start="16">
-<li>jq 是处理 JSON 的强大工具。用 curl 获取示例数据 <a target="_blank" rel="noopener" href="https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json%EF%BC%8C%E5%86%8D%E7%94%A8">https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json，再用</a> jq 提取 version 大于 6 的人员姓名。（提示：先 jq . 看结构；再试 jq ‘.[] | select(…) | .name’）</li>
-</ol>
+<div class="q-box-badge" data-title="Q16">
+
+<p>jq 是处理 JSON 的强大工具。用 curl 获取示例数据 <a target="_blank" rel="noopener" href="https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json%EF%BC%8C%E5%86%8D%E7%94%A8">https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json，再用</a> jq 提取 version 大于 6 的人员姓名。（提示：先 jq . 看结构；再试 jq ‘.[] | select(…) | .name’）</p>
+</div>
+
 <p>按照题目提示依次运行一下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 先看整体结构</span></span><br><span class="line">curl -s https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json | jq .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 只取 name 字段</span></span><br><span class="line">curl -s https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json | jq <span class="string">&#x27;.[] | select(.version &gt; 6) | .name&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>首先可以看到结构:<br><img src="/img/31788b4745e0bb72a9b7920b746ee40f.png" alt="alt text"><br>有 <code>name</code>、<code>language</code>、<code>id</code>、<code>bio</code>、<code>version</code> 五个字段。<br>接下来就查找 version 大于 6 的人员姓名：<br><img src="/img/a7dc49ec77d565a2b90e669c570c76b8.png" alt="alt text"></p>
@@ -428,9 +454,11 @@
 <li><code>select(.version &gt; 6)</code>: 只保留 version 字段大于 6 的对象</li>
 <li><code>| .name</code>: 从过滤后的对象中，只取出 name 字段的值</li>
 </ul>
-<ol start="17">
-<li>awk 可以按列值过滤行并改写输出。例如，awk ‘$3 ~ &#x2F;pattern&#x2F; {$4&#x3D;””; print}’ 会只输出第三列匹配 pattern 的行，并省略第四列。请写一个 awk 命令：只输出第二列大于 100 的行，并交换第一列和第三列。可用这条命令测试：printf ‘a 50 x\nb 150 y\nc 200 z\n’</li>
-</ol>
+<div class="q-box-badge" data-title="Q17">
+
+<p>awk 可以按列值过滤行并改写输出。例如，awk ‘$3 ~ &#x2F;pattern&#x2F; {$4&#x3D;””; print}’ 会只输出第三列匹配 pattern 的行，并省略第四列。请写一个 awk 命令：只输出第二列大于 100 的行，并交换第一列和第三列。可用这条命令测试：printf ‘a 50 x\nb 150 y\nc 200 z\n’</p>
+</div>
+
 <p>用命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;$2 &gt; 100 &#123; print $3, $2, $1 &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>测试题目给的样例：</p>
@@ -440,9 +468,11 @@
 <li>第一行 <code>a 50 x</code> 因为 <code>50 &lt; 100</code> 被过滤掉了</li>
 <li>第二、三行满足条件，输出时交换了第一列和第三列</li>
 </ul>
-<ol start="18">
-<li>拆解讲义中的 SSH 日志处理管道：每一步分别做了什么？然后仿照它构建一个管道，从 ~&#x2F;.bash_history（或 ~&#x2F;.zsh_history）中找出你最常使用的 Shell 命令。</li>
-</ol>
+<div class="q-box-badge" data-title="Q18">
+
+<p>拆解讲义中的 SSH 日志处理管道：每一步分别做了什么？然后仿照它构建一个管道，从 ~&#x2F;.bash_history（或 ~&#x2F;.zsh_history）中找出你最常使用的 Shell 命令。</p>
+</div>
+
 <p>解析这条命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">missing:~$ ssh myserver <span class="string">&#x27;journalctl -u sshd -b-1 | grep &quot;Disconnected from&quot;&#x27;</span> \</span><br><span class="line">  | sed -E <span class="string">&#x27;s/.*Disconnected from .* user (.*) [^ ]+ port.*/\1/&#x27;</span> \</span><br><span class="line">  | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c \</span><br><span class="line">  | <span class="built_in">sort</span> -nk1,1 | <span class="built_in">tail</span> -n10 \</span><br><span class="line">  | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="built_in">paste</span> -sd,</span><br><span class="line">postgres,mysql,oracle,dell,ubuntu,inspur,<span class="built_in">test</span>,admin,user,root</span><br></pre></td></tr></table></figure>
 <ul>
@@ -464,7 +494,7 @@
 </ul>
 <p>测试结果：<br><img src="/img/5d07e76fab71fd8434448645ba3791c0.png" alt="alt text"><br>果然最常用的是ls（其实是刚开始用）</p>
 <p>这个第一讲作业也是分了两个晚上才搞完，磨磨蹭蹭的，前一天搞到快一点还要上早八就放到今晚了，希望接下来也能继续坚持……其实深度学习已经一个月没碰了，真的能学下去吗，边学边看吧。</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Rhys</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/">http://example.com/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Rhys's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/shell/">shell</a><a class="post-meta__tags" href="/tags/missing-semester/">missing semester</a></div><div class="post-share"><div class="social-share" data-image="/img/headhacker.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/05/10/%E2%80%9CWEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E2%80%9D/" title="WEB安全基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">WEB安全基础</div></div><div class="info-2"><div class="info-item-1">三月份的时候听了一下暨大开的WEB安全讲座，那个月为了听这个讲座真是痛苦啊，不过还好学到了点基础知识，也记了一点笔记，不过当时我是手记的，本来没想过要发成博客，不过四月底刚打完W4terCTF，重新回看这部分知识比当初有了更多的一些理解，于是觉得记录下来也挺好的，存档一下。 HTTP与浏览器解析浏览器解析过程  TCP报文 → HTTP协议解析 → 读请求 → 返回响应报 → 包括 HTML、CSS、JS  页面类型  静态页面 动态页面 → 查询数据库  报文  状态行：显示状态码(200 OK, 404 Not Found) 响应头：显示content-type Content-Length 响应体：实际内容  状态码分类    $2xx$ 成功 $3xx$ 重定向 $4xx$ 客户端错误 $5xx$ 服务器错误    200请求成功 301永久 400 格式 500 内部错误   201资源创建成功 302 临时 401 未授权 502网关代理无效响应   209 成功但无内容返回 304未修改 404 不存在 503 不可用      504 超时   浏览器解析渲染页面...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/headhacker.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Rhys</div><div class="author-info-description">CTF萌新 / 羽毛球爱好者 / ACM入门中</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/rhys-tt"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/rhys-tt" target="_blank" title="Github"><i class="fab fa-github" style="color: #00FFFF;"></i></a><a class="social-icon" href="mailto:linzch25@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的学习基地</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise">missing semester——shell practise</a><time datetime="2026-05-13T17:10:35.000Z" title="发表于 2026-05-14 01:10:35">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/10/%E2%80%9CWEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E2%80%9D/" title="WEB安全基础">WEB安全基础</a><time datetime="2026-05-10T04:34:27.000Z" title="发表于 2026-05-10 12:34:27">2026-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BB%8E%E7%A5%9E%E7%BB%8F%E5%85%83%E7%BB%93%E6%9E%84%E5%88%B0%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/" title="深度学习基础（二）：从神经元结构到模型优化">深度学习基础（二）：从神经元结构到模型优化</a><time datetime="2026-04-16T02:00:00.000Z" title="发表于 2026-04-16 10:00:00">2026-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9ACNN%E6%9E%B6%E6%9E%84%E3%80%81%E6%93%8D%E4%BD%9C%E4%B8%8E%E5%BA%95%E5%B1%82%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" title="深度学习基础：CNN架构、操作与底层数学推导">深度学习基础：CNN架构、操作与底层数学推导</a><time datetime="2026-04-11T02:00:00.000Z" title="发表于 2026-04-11 10:00:00">2026-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/05/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E4%B8%80%E5%88%B7%E6%80%BB%E7%BB%93%E2%80%9C/" title="代码随想录一刷总结">代码随想录一刷总结</a><time datetime="2026-04-05T07:23:00.000Z" title="发表于 2026-04-05 15:23:00">2026-04-05</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Rhys</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Rhys</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/">http://example.com/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Rhys's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/shell/">shell</a><a class="post-meta__tags" href="/tags/missing-semester/">missing semester</a></div><div class="post-share"><div class="social-share" data-image="/img/headhacker.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/05/10/%E2%80%9CWEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E2%80%9D/" title="WEB安全基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">WEB安全基础</div></div><div class="info-2"><div class="info-item-1">三月份的时候听了一下暨大开的WEB安全讲座，那个月为了听这个讲座真是痛苦啊，不过还好学到了点基础知识，也记了一点笔记，不过当时我是手记的，本来没想过要发成博客，不过四月底刚打完W4terCTF，重新回看这部分知识比当初有了更多的一些理解，于是觉得记录下来也挺好的，存档一下。 HTTP与浏览器解析浏览器解析过程  TCP报文 → HTTP协议解析 → 读请求 → 返回响应报 → 包括 HTML、CSS、JS  页面类型  静态页面 动态页面 → 查询数据库  报文  状态行：显示状态码(200 OK, 404 Not Found) 响应头：显示content-type Content-Length 响应体：实际内容  状态码分类    $2xx$ 成功 $3xx$ 重定向 $4xx$ 客户端错误 $5xx$ 服务器错误    200请求成功 301永久 400 格式 500 内部错误   201资源创建成功 302 临时 401 未授权 502网关代理无效响应   209 成功但无内容返回 304未修改 404 不存在 503 不可用      504 超时   浏览器解析渲染页面...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/headhacker.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Rhys</div><div class="author-info-description">CTF萌新 / 羽毛球爱好者 / ACM入门中</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/rhys-tt"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/rhys-tt" target="_blank" title="Github"><i class="fab fa-github" style="color: #00FFFF;"></i></a><a class="social-icon" href="mailto:linzch25@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的学习基地</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BC%80%E5%A7%8B"><span class="toc-number">1.</span> <span class="toc-text">新开始</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise">missing semester——shell practise</a><time datetime="2026-05-13T17:10:35.000Z" title="发表于 2026-05-14 01:10:35">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/10/%E2%80%9CWEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E2%80%9D/" title="WEB安全基础">WEB安全基础</a><time datetime="2026-05-10T04:34:27.000Z" title="发表于 2026-05-10 12:34:27">2026-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BB%8E%E7%A5%9E%E7%BB%8F%E5%85%83%E7%BB%93%E6%9E%84%E5%88%B0%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/" title="深度学习基础（二）：从神经元结构到模型优化">深度学习基础（二）：从神经元结构到模型优化</a><time datetime="2026-04-16T02:00:00.000Z" title="发表于 2026-04-16 10:00:00">2026-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9ACNN%E6%9E%B6%E6%9E%84%E3%80%81%E6%93%8D%E4%BD%9C%E4%B8%8E%E5%BA%95%E5%B1%82%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" title="深度学习基础：CNN架构、操作与底层数学推导">深度学习基础：CNN架构、操作与底层数学推导</a><time datetime="2026-04-11T02:00:00.000Z" title="发表于 2026-04-11 10:00:00">2026-04-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/05/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E4%B8%80%E5%88%B7%E6%80%BB%E7%BB%93%E2%80%9C/" title="代码随想录一刷总结">代码随想录一刷总结</a><time datetime="2026-04-05T07:23:00.000Z" title="发表于 2026-04-05 15:23:00">2026-04-05</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Rhys</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
   const loadMathjax = () => {
     if (!window.MathJax) {
       window.MathJax = {
