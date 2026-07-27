@@ -1,246 +1,870 @@
-/* 1. 从谷歌字体库偷偷“进货”两款高级字体 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Zhi+Mang+Xing&display=swap');
+/* ==========================================================================
+   Rhys's Blog — 自定义样式（Butterfly 精修版）
+   --------------------------------------------------------------------------
+   组织方式：
+     0. 设计令牌（圆角 / 阴影 / 缓动 / 间距）
+     1. 字体与排版
+     2. 顶部大图与导航
+     3. 首页文章卡片
+     4. 正文排版（标题 / 引用 / 表格 / 代码 / 链接）
+     5. 侧边栏与目录
+     6. 评论区（Twikoo）
+     7. 分页 / 右下角按钮 / 页脚
+     8. 自定义前言框（沿用原有 class，改为令牌驱动）
+     9. 动效与可访问性
+   说明：本文件只做覆盖，不改主题源码，主题升级不受影响。
+   ========================================================================== */
 
-/* 2. 精准狙击主页的打字机副标题 (#subtitle) */
+/* ==========================================================================
+   0. 设计令牌
+   ========================================================================== */
+:root {
+  /* 圆角阶梯 */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+
+  /* 阴影阶梯：越靠上层阴影越大，形成清晰的层级关系 */
+  --sh-1: 0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .06);
+  --sh-2: 0 4px 10px rgba(16, 24, 40, .06), 0 2px 4px rgba(16, 24, 40, .04);
+  --sh-3: 0 12px 28px rgba(16, 24, 40, .10), 0 4px 10px rgba(16, 24, 40, .06);
+
+  /* 缓动：统一用这两条曲线，避免各处动效节奏打架 */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-io: cubic-bezier(.4, 0, .2, 1);
+  --dur-fast: .18s;
+  --dur-base: .3s;
+
+  /* 语义色。
+     注意：不要用 --btn-bg 当主色源——Butterfly 在暗色模式下把它改成了深灰。
+     --default-bg-color 在明暗两套主题里都等于 theme_color.main，才是稳定的钩子。 */
+  --accent: var(--default-bg-color, #4A90E2);
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --hairline: rgba(16, 24, 40, .08);
+}
+
+[data-theme='dark'] {
+  --sh-1: 0 1px 2px rgba(0, 0, 0, .3);
+  --sh-2: 0 4px 12px rgba(0, 0, 0, .38);
+  --sh-3: 0 14px 32px rgba(0, 0, 0, .5);
+  --hairline: rgba(255, 255, 255, .1);
+
+  /* 深色底上把主色提亮一档，保证正文链接的对比度达标 */
+  --accent: #6FA8EA;
+  --accent-soft: color-mix(in srgb, #6FA8EA 16%, transparent);
+}
+
+/* 覆盖主题默认的卡片阴影，接入上面的阶梯 */
+:root {
+  --card-box-shadow: var(--sh-1);
+  --card-hover-box-shadow: var(--sh-3);
+}
+
+/* ==========================================================================
+   1. 字体与排版
+   --------------------------------------------------------------------------
+   注意：这里刻意不使用 Google Fonts 的 @import。
+   fonts.googleapis.com 在国内基本不可达，@import 会阻塞整份 CSS 的解析，
+   首屏白屏时间可能被拖长好几秒。全部改用系统字体栈。
+   ========================================================================== */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans SC',
+    'Noto Sans CJK SC', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas,
+    'SF Mono', Menlo, monospace, 'PingFang SC', 'Microsoft YaHei';
+  --font-hand: 'Kaiti SC', 'STKaiti', KaiTi, '楷体', 'Noto Serif SC',
+    'Songti SC', serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code,
+kbd,
+pre,
+samp,
+figure.highlight,
+.highlight-tools {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+/* 首页打字机副标题：保留手写感，但改用系统楷体，不再走外网字体 */
 #subtitle {
-    /* 默认使用：思源宋体。如果你想换成狂草，就把下面这行改成 font-family: 'Zhi Mang Xing', cursive; */
-    font-family: 'Zhi Mang Xing', cursive;
-    
-    font-size: 1.3rem;      /* 字体稍微放大一点，更有气势 */
-    font-weight: 500;       /* 字重，控制粗细 */
-    letter-spacing: 3px;    /* 字间距拉开一点点 */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 加一点点低调的阴影，让字浮起来 */
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .45);
 }
 
-/* (可选) 把打字机的光标也稍微改大一点点，配合新字体 */
 #subtitle::after {
-    font-size: 1.4rem;
-}
-/* =======================================
-   超超专属：高级自定义前言框样式
-======================================= */
-
-/* 整体容器：使用 Flexbox 布局保证图标和文字完美对齐 */
-.chao-preface-box {
-    display: flex;
-    align-items: flex-start;
-    margin: 25px 0;
-    padding: 20px 25px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #f8fbff, #f0f5ff); /* 极具高级感的浅蓝渐变背景 */
-    box-shadow: 0 8px 16px rgba(0, 50, 150, 0.05); /* 柔和的高级阴影 */
-    border-left: 5px solid #4a90e2; /* 左侧点缀一条科技蓝粗线 */
-    transition: all 0.3s ease;
+  font-size: 1.4rem;
 }
 
-/* 鼠标悬停特效：框框微微浮起 */
-.chao-preface-box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 20px rgba(0, 50, 150, 0.08);
+/* 标题断行更自然，避免出现孤字 */
+h1, h2, h3, h4,
+#site-title,
+.article-title,
+#post-title {
+  text-wrap: pretty;
 }
 
-/* 左侧图标样式 */
-.chao-preface-box .box-icon {
-    font-size: 1.8rem;
-    margin-right: 18px;
-    margin-top: 2px;
+/* ==========================================================================
+   2. 顶部大图与导航
+   ========================================================================== */
+
+/* 大图未加载完成时的底色，避免白闪 */
+#page-header {
+  background-color: #16181d;
 }
 
-/* 右侧正文样式 */
-.chao-preface-box .box-content {
-    flex: 1;
-    color: #333333;
-    line-height: 1.7;
-    font-size: 1rem;
-}
-
-/* 标题样式：加粗加点颜色 */
-.chao-preface-box .box-content strong {
-    color: #2c3e50;
-    font-size: 1.1rem;
-    display: inline-block;
-    margin-bottom: 8px;
-}
-
-/* 🌙 夜间模式完美适配（当博客切到暗黑模式时自动生效） */
-[data-theme='dark'] .chao-preface-box {
-    background: linear-gradient(145deg, #2a2d34, #24262b);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    border-left: 5px solid #5ca0f2;
-}
-[data-theme='dark'] .chao-preface-box .box-content {
-    color: #dcdcdc;
-}
-[data-theme='dark'] .chao-preface-box .box-content strong {
-    color: #ffffff;
-}
-/* Vercel 极简风前言框 */
-.vercel-callout {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
-    background-color: #fafafa;
-    color: #111;
-    display: flex;
-    gap: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
-}
-.vercel-callout svg {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    color: #0070f3; /* Vercel 标志性的克制蓝 */
-}
-.vercel-callout-content { line-height: 1.6; font-size: 0.95rem; }
-.vercel-callout-title { font-weight: 600; margin-bottom: 6px; font-size: 1.05rem; }
-
-/* 夜间模式适配 */
-[data-theme='dark'] .vercel-callout {
-    background-color: #000000;
-    border-color: #333333;
-    color: #ededed;
-}
- /* <div class="vercel-callout">
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    <div class="vercel-callout-content">
-        <div class="vercel-callout-title">前言导读</div>
-        作为网安专业的学生，最近越发感受到底层原理的重要性。继磕完 C++ 和算法之后，这段时间开始向更深层的 AI 领域进发。这篇文章是我近期死磕 CNN 架构和底层数学推导的阶段性复盘。
-    </div>
-</div> */
-/* 苹果毛玻璃前言框 */
-.glass-callout {
-    margin: 2rem 0;
-    padding: 1.5rem 2rem;
-    position: relative;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-}
-/* 左侧优雅的渐变高亮条 */
-.glass-callout::before {
-    content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 4px;
-    background: linear-gradient(180deg, #ff2a5f, #ff719a);
-}
-.glass-callout strong { font-size: 1.1rem; color: #333; margin-bottom: 8px; display: block; }
-.glass-callout p { margin: 0; color: #555; line-height: 1.7; font-size: 0.95rem; }
-
-[data-theme='dark'] .glass-callout {
-    background: rgba(20, 20, 20, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-[data-theme='dark'] .glass-callout strong { color: #eee; }
-[data-theme='dark'] .glass-callout p { color: #ccc; }
-/* <div class="glass-callout">
-    <strong>✨ 卷首语：万丈高楼平地起</strong>
-    <p>这篇文章是我近期死磕 CNN 架构和底层数学推导的阶段性复盘。分享出来，希望能给同样在啃 AI 底层的师傅们一点参考，我们顶峰相见！</p>
-</div> */
-/* 骇客终端前言框 */
-.terminal-callout {
-    margin: 2.5rem 0 2rem 0;
-    padding: 1.5rem;
-    background-color: #0d1117; /* GitHub 暗黑主题同款背景 */
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    position: relative;
-    font-family: 'Courier New', Courier, monospace; /* 强制等宽字体 */
-    color: #c9d1d9;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-.terminal-callout::before {
-    content: "root@chaochao:~# ./preface.sh";
-    position: absolute;
-    top: -12px;
-    left: 16px;
-    background-color: #0d1117;
-    padding: 0 10px;
-    color: #58a6ff; /* 终端高亮蓝 */
-    font-weight: bold;
-    font-size: 0.85rem;
-    border: 1px solid #30363d;
-    border-radius: 4px;
-}
-.terminal-callout p { margin: 0; line-height: 1.6; font-size: 0.95rem; }
-.terminal-callout .cursor { display: inline-block; width: 8px; height: 15px; background: #58a6ff; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px; }
-@keyframes blink { 50% { opacity: 0; } }
-/* <div class="terminal-callout">
-    <p>> Loading CNN mathematical derivation module... [OK]<br>
-    > Initializing preface sequence...<br><br>
-    这篇文章是我近期死磕 CNN 架构和底层数学推导的阶段性复盘。分享出来，希望能给各位师傅们一点参考，我们顶峰相见！<span class="cursor"></span></p>
-</div> */
-/* 给主页顶部大图加一个深色底板，图片加载出来前就不会刺眼 */
 #page-header.full_page {
-    background-color: #1a1a1a; /* 这是一个高级的深灰色，你可以自己换 */
+  background-color: #16181d;
 }
 
-/* =======================================
-   问题专属框：现代悬浮徽章风 (动态标题升级版)
-======================================= */
+/* 站点标题：字重与阴影收一点，别糊成一团 */
+#site-title {
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .45);
+}
+
+/* 导航栏：滚动后（.nav-fixed）切成毛玻璃 + 细描边，比纯白底更有质感 */
+#nav {
+  transition: background-color var(--dur-base) var(--ease-io),
+              box-shadow var(--dur-base) var(--ease-io),
+              padding var(--dur-base) var(--ease-io);
+}
+
+/* 选择器要写满 #page-header.nav-fixed #nav，否则权重压不过主题自带的规则 */
+#page-header.nav-fixed #nav {
+  background: color-mix(in srgb, var(--card-bg) 78%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: var(--sh-1);
+}
+
+/* 菜单项下划线
+   ------------------------------------------------------------------
+   ⚠️ Butterfly 自带这条下划线，选择器是：
+        #nav .site-page:not(.child)::after   { left: 0; bottom: 0; height: 3px; width: 0 }
+        #nav .site-page:not(.child):hover::after { width: 100% }
+   一个元素只有一个 ::after，所以这里**必须用完全相同的选择器**去覆盖。
+   如果只写 #nav .site-page::after，权重少一个 :not(.child)，
+   left/bottom/height 全都压不过主题，只有主题没写的 transform 会生效——
+   结果就是下划线被 translateX(-50%) 整体左移半个身位，看起来完全没对齐。
+   ------------------------------------------------------------------ */
+#nav .site-page {
+  transition: color var(--dur-fast) var(--ease-io);
+}
+
+#nav .site-page:not(.child)::after {
+  left: 50%;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--accent);
+  transform: translateX(-50%);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+/* ==========================================================================
+   3. 首页文章卡片
+   ========================================================================== */
+#recent-posts .recent-post-item {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--sh-1);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+  will-change: transform;
+}
+
+#recent-posts .recent-post-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-3);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* 封面图缓慢放大，比瞬间跳变柔和 */
+#recent-posts .recent-post-item .post_cover img.post-bg {
+  transition: transform .7s var(--ease-out);
+}
+
+#recent-posts .recent-post-item:hover .post_cover img.post-bg {
+  transform: scale(1.06);
+}
+
+/* 标题：hover 时上色 + 下划线滑出 */
+#recent-posts .recent-post-item .article-title {
+  font-weight: 600;
+  line-height: 1.45;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 2px;
+  transition: color var(--dur-fast) var(--ease-io),
+              background-size var(--dur-base) var(--ease-out);
+}
+
+#recent-posts .recent-post-item .article-title:hover {
+  color: var(--accent);
+  background-size: 100% 2px;
+}
+
+/* 元信息：弱化，让标题和摘要成为视觉主体 */
+#recent-posts .recent-post-item .article-meta-wrap {
+  font-size: .82rem;
+  opacity: .78;
+}
+
+#recent-posts .recent-post-item .content {
+  line-height: 1.8;
+  opacity: .88;
+}
+
+/* ==========================================================================
+   4. 正文排版
+   ========================================================================== */
+#article-container {
+  line-height: 1.85;
+}
+
+/* 中英文混排时自动补空隙（浏览器支持则生效） */
+#article-container p {
+  text-spacing-trim: space-first;
+  margin: 0 0 1.1em;
+}
+
+/* 标题层级：h2 带一条主题色前导条，h3 用点，层级一眼可辨 */
+#article-container h2,
+#article-container h3,
+#article-container h4 {
+  font-weight: 650;
+  letter-spacing: .2px;
+  scroll-margin-top: 80px; /* 锚点跳转时不被固定导航挡住 */
+}
+
+#article-container h2 {
+  position: relative;
+  padding-left: .7em;
+  margin-top: 2.2em;
+}
+
+#article-container h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .18em;
+  bottom: .18em;
+  width: 4px;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+#article-container h3 {
+  position: relative;
+  padding-left: .7em;
+  margin-top: 1.8em;
+}
+
+#article-container h3::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 65%, transparent);
+  transform: translateY(-50%);
+}
+
+/* 正文链接：细下划线 + hover 加粗，不用整块背景色 */
+#article-container a:not(.headerlink):not(.fancybox) {
+  color: var(--accent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: border-color var(--dur-fast) var(--ease-io),
+              background-color var(--dur-fast) var(--ease-io);
+}
+
+#article-container a:not(.headerlink):not(.fancybox):hover {
+  border-bottom-color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+/* 引用块 */
+#article-container blockquote {
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  border-left-width: 3px;
+}
+
+/* 行内代码 */
+#article-container :not(pre) > code {
+  padding: .18em .42em;
+  border-radius: var(--r-sm);
+  font-size: .9em;
+  border: 1px solid var(--hairline);
+}
+
+/* 代码块：圆角 + 细描边 + 阴影，滚动条收窄 */
+#article-container figure.highlight,
+#article-container pre {
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-2);
+  overflow: hidden;
+}
+
+#article-container figure.highlight table::-webkit-scrollbar,
+#article-container pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* 图片：圆角 + 阴影，点开前有轻微 hover 提示 */
+#article-container img {
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-1);
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+
+#article-container img:hover {
+  box-shadow: var(--sh-2);
+}
+
+/* 表格：表头对齐主题色，行 hover 高亮 */
+#article-container table {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--sh-1);
+}
+
+#article-container table thead {
+  background: color-mix(in srgb, var(--accent) 82%, #000);
+}
+
+#article-container tbody tr {
+  transition: background-color var(--dur-fast) var(--ease-io);
+}
+
+#article-container tbody tr:hover {
+  background: var(--accent-soft);
+}
+
+/* 文章主体卡片 */
+#post,
+#page,
+.layout > div:first-child:not(.recent-posts) {
+  border-radius: var(--r-lg);
+}
+
+/* 文章标签 / 版权 / 相关文章：统一圆角与描边 */
+.post-copyright,
+.relatedPosts .relatedPosts-list > *,
+#post .tag_share .post-meta__tag-list .post-meta__tags {
+  border-radius: var(--r-md);
+}
+
+.relatedPosts .relatedPosts-list > * {
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+
+.relatedPosts .relatedPosts-list > *:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-2);
+}
+
+/* ==========================================================================
+   5. 侧边栏与目录
+   ========================================================================== */
+#aside-content .card-widget {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--sh-1);
+  transition: box-shadow var(--dur-base) var(--ease-out);
+}
+
+#aside-content .card-widget:hover {
+  box-shadow: var(--sh-2);
+}
+
+#aside-content .card-info .avatar-img {
+  transition: transform .6s var(--ease-out);
+}
+
+#aside-content .card-info:hover .avatar-img {
+  transform: scale(1.05) rotate(3deg);
+}
+
+#aside-content .item-headline {
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+/* 标签云 / 分类：胶囊化 */
+#aside-content .card-tag-cloud a,
+#aside-content .card-categories .card-category-list-item a {
+  transition: color var(--dur-fast) var(--ease-io),
+              background-color var(--dur-fast) var(--ease-io);
+}
+
+#aside-content .card-tag-cloud a:hover {
+  color: var(--accent) !important;
+}
+
+/* 目录：当前项用主题色块标记，滚动跟随时更容易定位 */
+#card-toc .toc-content .toc-link {
+  border-radius: var(--r-sm);
+  padding: 2px 6px;
+  transition: background-color var(--dur-fast) var(--ease-io),
+              color var(--dur-fast) var(--ease-io);
+}
+
+#card-toc .toc-content .toc-link:hover {
+  background: var(--accent-soft);
+}
+
+#card-toc .toc-content .toc-link.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   6. 评论区（Twikoo）
+   --------------------------------------------------------------------------
+   以下样式在 twikoo.envId 填好、评论系统启用后生效；未启用时不影响任何东西。
+   ========================================================================== */
+#post-comment .comment-head .comment-headline {
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+/* 输入区：卡片化，聚焦时描边点亮 */
+#twikoo .tk-input,
+#twikoo .el-textarea__inner,
+#twikoo .tk-meta-input input {
+  border-radius: var(--r-md) !important;
+  border: 1px solid var(--hairline) !important;
+  background: var(--card-bg) !important;
+  transition: border-color var(--dur-fast) var(--ease-io),
+              box-shadow var(--dur-fast) var(--ease-io) !important;
+}
+
+#twikoo .tk-input:focus-within,
+#twikoo .el-textarea__inner:focus,
+#twikoo .tk-meta-input input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-soft) !important;
+  outline: none !important;
+}
+
+/* 提交按钮 */
+#twikoo .tk-submit .tk-row .tk-submit-action-icon,
+#twikoo .el-button--primary {
+  border-radius: var(--r-md) !important;
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  transition: transform var(--dur-fast) var(--ease-out),
+              filter var(--dur-fast) var(--ease-io) !important;
+}
+
+#twikoo .el-button--primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+/* 单条评论：卡片化 + 悬停微高亮 */
+#twikoo .tk-comment {
+  border-radius: var(--r-lg);
+}
+
+#twikoo .tk-comments .tk-comment > .tk-content,
+#twikoo .tk-replies .tk-comment {
+  border-radius: var(--r-md);
+}
+
+#twikoo .tk-comments .tk-comment {
+  padding: 4px 8px;
+  border-radius: var(--r-md);
+  transition: background-color var(--dur-base) var(--ease-io);
+}
+
+#twikoo .tk-comments .tk-comment:hover {
+  background: var(--accent-soft);
+}
+
+/* 头像圆形 + 细边 */
+#twikoo .tk-avatar,
+#twikoo .tk-avatar img {
+  border-radius: 50% !important;
+}
+
+#twikoo .tk-avatar {
+  box-shadow: 0 0 0 2px var(--hairline);
+}
+
+/* 昵称与时间 */
+#twikoo .tk-nick {
+  font-weight: 600;
+}
+
+#twikoo .tk-time,
+#twikoo .tk-extras {
+  opacity: .7;
+  font-size: .82em;
+}
+
+/* 博主标识 */
+#twikoo .tk-tag-green,
+#twikoo .tk-tag {
+  border-radius: 999px !important;
+}
+
+/* 评论区正文里的代码与图片跟正文保持一致的观感 */
+#twikoo .tk-content img:not(.tk-owo-emotion) {
+  border-radius: var(--r-sm);
+}
+
+#twikoo .tk-content code {
+  border-radius: var(--r-sm);
+  padding: .15em .4em;
+}
+
+/* 侧边栏「最新评论」卡片 */
+#card-newest-comments .aside-list-item {
+  border-radius: var(--r-md);
+  padding: 6px;
+  transition: background-color var(--dur-fast) var(--ease-io);
+}
+
+#card-newest-comments .aside-list-item:hover {
+  background: var(--accent-soft);
+}
+
+/* ==========================================================================
+   7. 分页 / 右下角按钮 / 页脚
+   ========================================================================== */
+#pagination .pagination .page-number,
+#pagination .pagination .extend {
+  border-radius: var(--r-md);
+  transition: transform var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-io);
+}
+
+#pagination .pagination .page-number:hover,
+#pagination .pagination .extend:hover {
+  transform: translateY(-2px);
+}
+
+/* 上一篇 / 下一篇 */
+#pagination.pagination-post .prev-post:hover .cover,
+#pagination.pagination-post .next-post:hover .cover {
+  transform: scale(1.05);
+}
+
+/* 右下角悬浮按钮组 */
+#rightside > div > button,
+#rightside > div > a {
+  border-radius: var(--r-md);
+  transition: transform var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-io);
+}
+
+#rightside > div > button:hover,
+#rightside > div > a:hover {
+  transform: translateY(-2px);
+}
+
+#footer-wrap {
+  opacity: .9;
+  font-size: .88rem;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+}
+
+/* 选中文本 */
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* ==========================================================================
+   8. 自定义前言框（沿用原有 class 名，改为令牌驱动）
+   --------------------------------------------------------------------------
+   原来这几个框各写各的颜色（#4a90e2 / #0070f3 / #ff2a5f 三种蓝红混用），
+   现在统一挂到 --accent 上，换主题色时它们会跟着一起变。
+   ========================================================================== */
+
+/* 8.1 基础前言框 */
+.chao-preface-box {
+  display: flex;
+  align-items: flex-start;
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--r-lg);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  border-left: 4px solid var(--accent);
+  box-shadow: var(--sh-1);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+
+.chao-preface-box:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--sh-2);
+}
+
+.chao-preface-box .box-icon {
+  font-size: 1.6rem;
+  margin-right: 1rem;
+  line-height: 1.4;
+}
+
+.chao-preface-box .box-content {
+  flex: 1;
+  color: var(--font-color);
+  line-height: 1.75;
+}
+
+.chao-preface-box .box-content strong {
+  color: var(--text-highlight-color);
+  font-size: 1.05rem;
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+/* 8.2 极简风前言框 */
+.vercel-callout {
+  margin: 2rem 0;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  background: var(--card-bg);
+  color: var(--font-color);
+  display: flex;
+  gap: 14px;
+  box-shadow: var(--sh-1);
+}
+
+.vercel-callout svg {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--accent);
+}
+
+.vercel-callout-content {
+  line-height: 1.75;
+  font-size: .95rem;
+}
+
+.vercel-callout-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 1.02rem;
+  color: var(--text-highlight-color);
+}
+
+/* 8.3 毛玻璃前言框 */
+.glass-callout {
+  margin: 2rem 0;
+  padding: 1.4rem 1.8rem;
+  position: relative;
+  border-radius: var(--r-xl);
+  background: color-mix(in srgb, var(--card-bg) 55%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--sh-2);
+  overflow: hidden;
+}
+
+.glass-callout::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent),
+    color-mix(in srgb, var(--accent) 40%, transparent));
+}
+
+.glass-callout strong {
+  font-size: 1.05rem;
+  color: var(--text-highlight-color);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.glass-callout p {
+  margin: 0;
+  color: var(--font-color);
+  line-height: 1.75;
+  font-size: .95rem;
+}
+
+/* 8.4 终端风前言框（这个刻意保留固定深色，就是要终端质感） */
+.terminal-callout {
+  margin: 2.5rem 0 2rem;
+  padding: 1.4rem 1.5rem;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: var(--r-md);
+  position: relative;
+  font-family: var(--font-mono);
+  color: #c9d1d9;
+  box-shadow: var(--sh-2);
+}
+
+.terminal-callout::before {
+  content: 'root@rhys:~# ./preface.sh';
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  background: #0d1117;
+  padding: 0 10px;
+  color: #58a6ff;
+  font-weight: 700;
+  font-size: .82rem;
+  border: 1px solid #30363d;
+  border-radius: var(--r-sm);
+}
+
+.terminal-callout p {
+  margin: 0;
+  line-height: 1.7;
+  font-size: .93rem;
+}
+
+.terminal-callout .cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: #58a6ff;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* 8.5 问题框：悬浮徽章风（标题读 data-title 属性） */
 .q-box-badge {
-    position: relative;
-    margin: 2.5rem 0 1.5rem 0;
-    padding: 1.5rem 1.5rem 1rem 1.5rem;
-    background: #f8fbff;
-    border: 1px solid #e1ebfa;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.04);
+  position: relative;
+  margin: 2.5rem 0 1.5rem;
+  padding: 1.5rem;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-1);
 }
 
-/* 核心魔法：读取 HTML 里的 data-title 属性 */
 .q-box-badge::before {
-    content: attr(data-title); 
-    position: absolute;
-    top: -12px;
-    left: 16px;
-    background: linear-gradient(135deg, #4a90e2, #357abd);
-    color: #fff;
-    padding: 2px 14px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    border-radius: 4px;
-    letter-spacing: 1px;
-    box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+  content: attr(data-title);
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 14px;
+  font-size: .82rem;
+  font-weight: 700;
+  border-radius: var(--r-sm);
+  letter-spacing: 1px;
+  box-shadow: var(--sh-1);
 }
 
-/* 🌙 夜间模式完美适配 */
-[data-theme='dark'] .q-box-badge {
-    background: #1a1e24;
-    border-color: #2c323c;
-}
-
-/* =======================================
-   问题专属框：Mac拟物白卡风
-======================================= */
+/* 8.6 问题框：白卡风 */
 .q-box-mac {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin: 2.5rem 0 1.5rem 0;
+  background: var(--card-bg);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--sh-2);
+  padding: 1.5rem;
+  border-radius: var(--r-lg);
+  margin: 2.5rem 0 1.5rem;
 }
+
 .q-box-mac .q-tag {
-    display: inline-block;
-    background: #f3f4f6;
-    color: #374151;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    margin-bottom: 12px;
-    border: 1px solid #e5e7eb;
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: var(--r-sm);
+  font-size: .82rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
 }
-/* 夜间模式 */
-[data-theme='dark'] .q-box-mac {
-    background: #1e1e20;
-    border-color: #333;
+
+/* ==========================================================================
+   9. 动效与可访问性
+   ========================================================================== */
+
+/* 锚点跳转平滑滚动 */
+html {
+  scroll-behavior: smooth;
 }
-[data-theme='dark'] .q-box-mac .q-tag {
-    background: #2d2d30;
-    color: #e5e7eb;
-    border-color: #444;
+
+/* 键盘 Tab 聚焦时给出清晰焦点环（鼠标点击时不显示） */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* 尊重系统「减少动态效果」设置：关掉所有位移与缩放 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 移动端微调：卡片圆角与内边距收一点，避免拥挤 */
+@media screen and (max-width: 768px) {
+  :root {
+    --r-lg: 12px;
+    --r-xl: 16px;
+  }
+
+  #subtitle {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+  }
+
+  #article-container h2 {
+    margin-top: 1.8em;
+  }
 }

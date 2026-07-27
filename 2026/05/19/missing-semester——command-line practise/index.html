@@ -1,33 +1,33 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>missing-semester——command-line practise | Rhys's Blog</title><meta name="author" content="Rhys"><meta name="copyright" content="Rhys"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="命令行，强大的工具">
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>missing-semester——command-line practise | Rhys's Blog</title><meta name="author" content="Rhys"><meta name="copyright" content="Rhys"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#121212"><meta name="description" content="命令行，强大的工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="missing-semester——command-line practise">
-<meta property="og:url" content="http://example.com/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/index.html">
+<meta property="og:url" content="https://rhys-tt.github.io/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/index.html">
 <meta property="og:site_name" content="Rhys&#39;s Blog">
 <meta property="og:description" content="命令行，强大的工具">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/headhacker.png">
+<meta property="og:image" content="https://rhys-tt.github.io/img/avatar.webp">
 <meta property="article:published_time" content="2026-05-18T16:28:35.000Z">
 <meta property="article:modified_time" content="2026-05-22T16:03:50.978Z">
 <meta property="article:author" content="Rhys">
 <meta property="article:tag" content="command-line">
 <meta property="article:tag" content="missing semester">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/headhacker.png"><script type="application/ld+json">{
+<meta name="twitter:image" content="https://rhys-tt.github.io/img/avatar.webp"><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "missing-semester——command-line practise",
-  "url": "http://example.com/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/",
-  "image": "http://example.com/img/headhacker.png",
+  "url": "https://rhys-tt.github.io/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/",
+  "image": "https://rhys-tt.github.io/img/avatar.webp",
   "datePublished": "2026-05-18T16:28:35.000Z",
   "dateModified": "2026-05-22T16:03:50.978Z",
   "author": [
     {
       "@type": "Person",
       "name": "Rhys",
-      "url": "http://example.com"
+      "url": "https://rhys-tt.github.io"
     }
   ]
-}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://rhys-tt.github.io/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
     (() => {
       
     const saveToLocal = {
@@ -73,7 +73,7 @@
         document.head.appendChild(link)
       }),
       addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
+        if (!true && key.startsWith('pjax')) return
         const globalFn = parent.globalFn || {}
         globalFn[key] = globalFn[key] || {}
         globalFn[key][name || Object.keys(globalFn[key]).length] = fn
@@ -85,7 +85,7 @@
       const activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212')
         }
       }
       const activateLightMode = () => {
@@ -100,7 +100,25 @@
 
       const theme = saveToLocal.get('theme')
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
         
       
       const asideStatus = saveToLocal.get('aside-status')
@@ -120,9 +138,9 @@
   </script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":380,"highlightFullpage":false,"highlightMacStyle":true},
   copy: {
     success: '复制成功',
     error: '复制失败',
@@ -142,25 +160,26 @@
   },
   copyright: undefined,
   lightbox: 'null',
-  Snackbar: undefined,
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-right"},
   infinitegrid: {
     js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
     buttonText: '加载更多'
   },
   isPhotoFigcaption: false,
   islazyloadPlugin: false,
-  isAnchor: false,
+  isAnchor: true,
   percent: {
     toc: true,
     rightside: false,
   },
-  autoDarkmode: false
+  autoDarkmode: true
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: 'missing-semester——command-line practise',
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/headhacker.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/CTF%E9%A2%98%E8%A7%A3/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/background4.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Rhys's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">missing-semester——command-line practise</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/CTF%E9%A2%98%E8%A7%A3/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">missing-semester——command-line practise</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-18T16:28:35.000Z" title="发表于 2026-05-19 00:28:35">2026-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-22T16:03:50.978Z" title="更新于 2026-05-23 00:03:50">2026-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><h2 id="参数与-Globs"><a href="#参数与-Globs" class="headerlink" title="参数与 Globs"></a>参数与 Globs</h2><div class="q-box-badge" data-title="Q1">
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="Rhys's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/ctf/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/notes/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/life/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/background4.webp);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Rhys's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">missing-semester——command-line practise</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/categories/ctf/"><i class="fa-fw fas fa-flag"></i><span> CTF题解</span></a></div><div class="menus_item"><a class="site-page" href="/categories/algorithm-cpp/"><i class="fa-fw fas fa-code"></i><span> 算法与C++</span></a></div><div class="menus_item"><a class="site-page" href="/categories/notes/"><i class="fa-fw fas fa-robot"></i><span> 学习笔记</span></a></div><div class="menus_item"><a class="site-page" href="/categories/life/"><i class="fa-fw fas fa-feather"></i><span> 随便写写</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user-secret"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">missing-semester——command-line practise</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-18T16:28:35.000Z" title="发表于 2026-05-19 00:28:35">2026-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-22T16:03:50.978Z" title="更新于 2026-05-23 00:03:50">2026-05-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/notes/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><h2 id="参数与-Globs"><a href="#参数与-Globs" class="headerlink" title="参数与 Globs"></a>参数与 Globs</h2><div class="q-box-badge" data-title="Q1">
 
 <p>你可能见过像 <code>cmd --flag -- --notaflag</code> 这样的命令。这里的 <code>--</code> 是一个特殊参数，它告诉程序后面不要再继续解析选项（flag）了。也就是说，– 后面的所有内容都会被当作位置参数（positional argument）。这有什么用？试着运行 <code>touch -- -myfile</code>，然后在不使用 – 的情况下把它删掉。</p>
 </div>
@@ -168,8 +187,8 @@
 <ul>
 <li>– 的作用：<br>强制终止选项解析，后面所有内容都被当作普通的位置参数（文件名）</li>
 </ul>
-<p>运行 <code>touch -- -myfile</code> ,创建了 <code>-myfile</code> 文件：<br><img src="/img/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17792025828384.png" alt="alt text"></p>
-<p>用命令 <code>rm ./-myfile</code> 删除文件<br><img src="/img/9738497fd76831fdb89cad82e6cccafa.png" alt="alt text"></p>
+<p>运行 <code>touch -- -myfile</code> ,创建了 <code>-myfile</code> 文件：<br><img src="/img/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_17792025828384.png" alt="alt text" loading='lazy'></p>
+<p>用命令 <code>rm ./-myfile</code> 删除文件<br><img src="/img/9738497fd76831fdb89cad82e6cccafa.png" alt="alt text" loading='lazy'></p>
 <ul>
 <li>为什么不能直接 rm -myfile？<br>因为 rm 会把 -m 当成自己的选项（-m 是 rm 的一个参数），而不是文件名的一部分</li>
 <li>用 .&#x2F;-myfile 的原理：<br>加上相对路径前缀 .&#x2F; 后，整个字符串变成了一个路径，rm 就不会再把开头的 - 解析为选项了</li>
@@ -181,7 +200,7 @@
 
 </div>
 
-<p>用命令 <code>ls -laht --color=auto</code> :<br><img src="/img/655649cba34c93152bff1f68e70837a8.png"></p>
+<p>用命令 <code>ls -laht --color=auto</code> :<br><img src="/img/655649cba34c93152bff1f68e70837a8.png" loading='lazy'></p>
 <table>
 <thead>
 <tr>
@@ -222,8 +241,8 @@
 </div>
 
 <p>先尝试命令 <code>diff &lt;(printenv | sort) &lt;(export | sort)）</code> ,看到（节选）：</p>
-<p><img src="/img/393bedc3b75fac7351fb42f2296f6926-1.png" alt="alt text"></p>
-<p><img src="/img/3b66464586ba337ea3e3e4fcb9ba14d5.png" alt="alt text"></p>
+<p><img src="/img/393bedc3b75fac7351fb42f2296f6926-1.png" alt="alt text" loading='lazy'></p>
+<p><img src="/img/3b66464586ba337ea3e3e4fcb9ba14d5.png" alt="alt text" loading='lazy'></p>
 <p>不同点:</p>
 <ul>
 <li>输出格式不同:<br><code>printenv</code>：纯环境变量输出，格式为 <code>VAR=value</code><br><code>export：Shell</code> 内置命令，输出格式为 <code>declare -x VAR=&quot;value&quot;</code>（带引号和 <code>declare -x</code> 前缀）</li>
@@ -248,7 +267,7 @@
 <li><code>if [ -z &quot;$MARCO_SAVED_DIR&quot; ]</code>：<code>-z</code> 是 <code>Shell</code> 测试符，判断变量是否为空。防止没执行 <code>marco</code> 就直接跑 <code>polo</code>，导致报错。</li>
 <li><code>if [ ! -d &quot;$MARCO_SAVED_DIR&quot; ]</code>：<code>-d</code> 是判断路径是否是一个存在的目录。防止你保存目录之后，把目录删了，导致 <code>cd</code> 失败。</li>
 </ul>
-<p>测试：<br><img src="/img/736b66ebfdcab7424cc48c6f86a92856.png"></p>
+<p>测试：<br><img src="/img/736b66ebfdcab7424cc48c6f86a92856.png" loading='lazy'></p>
 <h2 id="返回码"><a href="#返回码" class="headerlink" title="返回码"></a>返回码</h2><div class="q-box-badge" data-title="Q1">
 
 <p>假设你有一个很少失败的命令。为了调试它，你需要把它的输出保存下来，但等到一次失败运行可能会很耗时。写一个 bash 脚本，不断运行下面这个脚本直到它失败为止，并把标准输出和标准错误分别保存到文件里，最后把结果打印出来。如果你还能顺便报告它运行了多少次才失败，就加分。</p>
@@ -259,7 +278,7 @@
 <p>先将题目脚本存起来命名为 <code>rare_failure.sh</code> ,再写脚本：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化计数器，记录运行次数</span></span><br><span class="line">count=0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环：不断运行脚本，直到它失败（退出码 != 0）</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">   <span class="comment"># 计数器+1</span></span><br><span class="line">   count=$((count + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 运行目标脚本，标准输出存到 stdout.log，标准错误存到 stderr.log</span></span><br><span class="line">   ./rare_failure.sh &gt; stdout.log 2&gt; stderr.log</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 检查上一条命令的退出码</span></span><br><span class="line">   <span class="comment"># $? = 0 代表成功，$? != 0 代表失败</span></span><br><span class="line">   <span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">&quot;脚本失败了！&quot;</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">&quot;总共运行了 <span class="variable">$count</span> 次才失败&quot;</span></span><br><span class="line">       <span class="built_in">echo</span> <span class="string">&quot;==================== 标准输出 ====================&quot;</span></span><br><span class="line">       <span class="built_in">cat</span> stdout.log</span><br><span class="line">       <span class="built_in">echo</span> <span class="string">&quot;==================== 标准错误 ====================&quot;</span></span><br><span class="line">       <span class="built_in">cat</span> stderr.log</span><br><span class="line">       <span class="comment"># 跳出循环</span></span><br><span class="line">       <span class="built_in">break</span></span><br><span class="line">   <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
-<p>加权限之后运行脚本：<br><img src="/img/26e261cea96fdc362aa12eef1d6f52b3.png" alt="alt text"></p>
+<p>加权限之后运行脚本：<br><img src="/img/26e261cea96fdc362aa12eef1d6f52b3.png" alt="alt text" loading='lazy'></p>
 <ul>
 <li><code>if [[ n -eq 42 ]]</code>: 当随机数刚好等于 42 时，进入失败分支</li>
 <li><code>exit 1</code>：以退出码 1 退出，代表脚本运行失败</li>
@@ -271,7 +290,7 @@
 <p>在终端里启动一个 sleep 10000 任务，用 Ctrl-Z 把它挂起，再用 bg 让它继续在后台运行。然后使用 pgrep 找到它的 pid，再用 pkill 把它杀掉，整个过程都不要手动输入这个 pid。（提示：试试 -af 参数）</p>
 </div>
 
-<p>用命令 <code>pgrep -af &quot;sleep 10000&quot;</code> 找到pid，用 <code>pkill -f &quot;sleep 10000&quot;</code> 来杀掉：<br><img src="/img/6ba83629ddcc2d01c3b2b6003518580d.png" alt="alt text"></p>
+<p>用命令 <code>pgrep -af &quot;sleep 10000&quot;</code> 找到pid，用 <code>pkill -f &quot;sleep 10000&quot;</code> 来杀掉：<br><img src="/img/6ba83629ddcc2d01c3b2b6003518580d.png" alt="alt text" loading='lazy'></p>
 <p>原理：</p>
 <table>
 <thead>
@@ -303,7 +322,7 @@
 <p>不过，如果我们是在另一个 bash 会话里启动的，这个策略就失效了，因为 wait 只对当前 shell 的子进程有效。讲义里还没提到的一点是：kill 命令成功时退出状态为 0，失败时则非 0。kill -0 不会真的发送信号，但如果进程不存在，它会返回非 0。写一个叫 pidwait 的 bash 函数，接收一个 pid，并一直等待到该进程结束。你应该用 sleep 来避免空转浪费 CPU。</p>
 </div>
 
-<p>用命令 <code>wait $! &amp;&amp; ls</code> :<br><img src="/img/4dea5345e5394dde5fab773311281935.png" alt="alt text"></p>
+<p>用命令 <code>wait $! &amp;&amp; ls</code> :<br><img src="/img/4dea5345e5394dde5fab773311281935.png" alt="alt text" loading='lazy'></p>
 <ul>
 <li><code>$!</code>：Shell 特殊变量，代表上一个后台进程的 PID</li>
 <li><code>wait $!</code>：等待 PID 为 $! 的进程执行完成</li>
@@ -344,8 +363,8 @@
 <td>让进程在关闭终端后依然继续运行</td>
 </tr>
 </tbody></table>
-<p>验证脚本：<br><img src="/img/8cac105b9dbcf88fc97da345e3dad7da.png" alt="alt text"></p>
-<p><img src="/img/90342131aaa8cdd8af5abda85d8f7738.png" alt="alt text"></p>
+<p>验证脚本：<br><img src="/img/8cac105b9dbcf88fc97da345e3dad7da.png" alt="alt text" loading='lazy'></p>
+<p><img src="/img/90342131aaa8cdd8af5abda85d8f7738.png" alt="alt text" loading='lazy'></p>
 <h2 id="文件与权限"><a href="#文件与权限" class="headerlink" title="文件与权限"></a>文件与权限</h2><div class="q-box-badge" data-title="Q1">
 
 <p>（进阶）写一个命令或脚本，递归找出某个目录中最近修改过的文件。更一般一点，你能不能按“最近修改时间”列出所有文件？</p>
@@ -372,7 +391,7 @@
 </li>
 <li><code>head -n 1</code>：只要排序后的第一行（最新的文件）</li>
 </ul>
-<p>测试：<br><img src="/img/6c8ec9d2e4ded7e38cf4e6f774c9826b.png" alt="alt text"></p>
+<p>测试：<br><img src="/img/6c8ec9d2e4ded7e38cf4e6f774c9826b.png" alt="alt text" loading='lazy'></p>
 <h2 id="终端复用器"><a href="#终端复用器" class="headerlink" title="终端复用器"></a>终端复用器</h2><div class="q-box-badge" data-title="Q1">
 
 <p>跟着这篇 tmux 教程 先上手，然后再按照 这些 步骤 学习一些基础定制。</p>
@@ -396,19 +415,19 @@
 <li><code>C-b C-&lt;arrow key&gt;</code>： 向&lt;箭头键&gt;方向调整面板大小</li>
 <li><code>C-b ,</code>：重新命名当前窗口</li>
 </ul>
-<p>再看博客 <code>https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/</code> 稍微配置了一下，不过没有深入体验：<br><img src="/img/ab319bf38e2e4da69ba716664ddc4a4f.png" alt="alt text"></p>
+<p>再看博客 <code>https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/</code> 稍微配置了一下，不过没有深入体验：<br><img src="/img/ab319bf38e2e4da69ba716664ddc4a4f.png" alt="alt text" loading='lazy'></p>
 <h2 id="Aliases-与-Dotfiles"><a href="#Aliases-与-Dotfiles" class="headerlink" title="Aliases 与 Dotfiles"></a>Aliases 与 Dotfiles</h2><div class="q-box-badge" data-title="Q1">
 
 <p>创建一个 alias dc，让你把 cd 打错时也能正常工作。</p>
 </div>
 
-<p>在配置文件 <code>~/.bashrc</code> 中加上 <code>alias dc=&quot;cd&quot;</code> 即可。<br><img src="/img/7726096ee5a6611619645d071821dc0a.png" alt="alt text"></p>
+<p>在配置文件 <code>~/.bashrc</code> 中加上 <code>alias dc=&quot;cd&quot;</code> 即可。<br><img src="/img/7726096ee5a6611619645d071821dc0a.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q2">
 
 <p>运行 history | awk ‘{$1&#x3D;””;print substr($0,2)}’ | sort | uniq -c | sort -n | tail -n 10，找出你最常用的 10 条命令，并考虑给它们写更短的 alias。注意：这条命令适用于 Bash；如果你用的是 ZSH，把 history 换成 history 1。</p>
 </div> 
 
-<p>运行题目给的命令成功找到常用命令，但是我懒得改了：<br><img src="/img/8203d8e432778637751203438781654f.png" alt="alt text"></p>
+<p>运行题目给的命令成功找到常用命令，但是我懒得改了：<br><img src="/img/8203d8e432778637751203438781654f.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q3">
 
 <p>为你的 dotfiles 建一个目录，并把它纳入版本控制。</p>
@@ -417,13 +436,13 @@
 <p>用以下命令即可：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回到家目录</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 dotfiles 专属文件夹</span></span><br><span class="line"><span class="built_in">mkdir</span> ~/dotfiles</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入该文件夹</span></span><br><span class="line"><span class="built_in">cd</span> ~/dotfiles</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 Git 仓库</span></span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
 
-<p><img src="/img/37522046924bb3454ea4945eb0cdf625.png" alt="alt text"></p>
+<p><img src="/img/37522046924bb3454ea4945eb0cdf625.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q4">
 
 <p>至少为一个程序加入配置，比如你的 shell，并做一些定制（刚开始时，哪怕只是通过设置 $PS1 来调整 shell prompt 也可以）。</p>
 </div>
 
-<p>在配置文件中加入命令 <code>PS1=&quot;\[\e[1;36m\]\u\[\e[0m\]@\[\e[1;35m\]\h\[\e[0m\]:\[\e[1;33m\]\W\[\e[0m\] \$ &quot;</code> 来配置shell prompt：<br><img src="/img/fc5d28f1ce3a526c9d496a1c86fbc333.png" alt="alt text"></p>
+<p>在配置文件中加入命令 <code>PS1=&quot;\[\e[1;36m\]\u\[\e[0m\]@\[\e[1;35m\]\h\[\e[0m\]:\[\e[1;33m\]\W\[\e[0m\] \$ &quot;</code> 来配置shell prompt：<br><img src="/img/fc5d28f1ce3a526c9d496a1c86fbc333.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q5">
 
 <p>配置一种方法，让你能在新机器上快速、自动地安装 dotfiles。这可以简单到只是写一个 shell 脚本，对每个文件执行 ln -s；也可以使用一个专门的工具。</p>
@@ -458,7 +477,7 @@
 <p>再为最后push到github上做准备，dotfiles 目录里新建一个 gitconfig ，填上默认的全局配置信息：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    name = 你的GitHub用户名</span><br><span class="line">    email = 你的GitHub绑定邮箱@example.com</span><br><span class="line"></span><br><span class="line">[core]</span><br><span class="line">    # 设置 Git 默认的文本编辑器为 nano（或者 vim）</span><br><span class="line">    editor = nano</span><br><span class="line">    # 自动处理 Windows 和 Linux 的换行符转换（对 WSL 用户非常重要）</span><br><span class="line">    autocrlf = input</span><br><span class="line"></span><br><span class="line">[color]</span><br><span class="line">    # 让 git status, git diff 等命令的输出带有漂亮的颜色</span><br><span class="line">    ui = auto</span><br><span class="line"></span><br><span class="line">[init]</span><br><span class="line">    # 设置新建仓库时的默认分支名为 main（顺应 GitHub 的潮流）</span><br><span class="line">    defaultBranch = main</span><br></pre></td></tr></table></figure>
 <p>在 <code>deploy.sh</code> 文件里面加上 <code>link_file &quot;$DOTFILES_DIR/gitconfig&quot; &quot;$HOME/.gitconfig</code> 即可</p>
-<p>调试过程：<br><img src="/img/240299c75e6506ed3291f1b7a63dd920.png" alt="alt text"><br><img src="/img/e3baa246b13f472eff178c4af97e7317.png" alt="alt text"><br><img src="/img/9ccf19ded6d5bfad5ef0d09c59234480.png" alt="alt text"></p>
+<p>调试过程：<br><img src="/img/240299c75e6506ed3291f1b7a63dd920.png" alt="alt text" loading='lazy'><br><img src="/img/e3baa246b13f472eff178c4af97e7317.png" alt="alt text" loading='lazy'><br><img src="/img/9ccf19ded6d5bfad5ef0d09c59234480.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q7">
 
 <p>把你的 dotfiles 发布到 GitHub。</p>
@@ -467,7 +486,7 @@
 <p>在github里面新建dotfiles仓库,运行一下命令发布：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/dotfiles</span><br><span class="line"><span class="comment"># 确保分支名为 main</span></span><br><span class="line">git branch -M main</span><br><span class="line"><span class="comment"># 关联远程仓库</span></span><br><span class="line">git remote add origin https://github.com/rhys-tt/dotfiles.git</span><br><span class="line"><span class="comment"># 推送代码</span></span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
 <p>但是用这个命令会遇到问题，因为早在 2021 年 8 月，GitHub 就彻底禁用了通过终端输入密码来推送代码的机制。只要通过 https:&#x2F;&#x2F; 的网址来推送，GitHub 就不认登录密码，强制要求输入PAT（Personal Access Token，个人访问令牌） 的长串字符来代替密码。</p>
-<p>所以需要去github里面生成一个PAT的令牌才能推送：<br><img src="/img/9b42ea46c2e145a73e06d130cff88223.png" alt="alt text"></p>
+<p>所以需要去github里面生成一个PAT的令牌才能推送：<br><img src="/img/9b42ea46c2e145a73e06d130cff88223.png" alt="alt text" loading='lazy'></p>
 <p>成功推送！更一劳永逸的应该是ssh，这在接下来的练习中也有实践。</p>
 <h2 id="远程机器（SSH）"><a href="#远程机器（SSH）" class="headerlink" title="远程机器（SSH）"></a>远程机器（SSH）</h2><div class="q-box-badge" data-title="Q1">
 
@@ -478,7 +497,7 @@
 <p>在管理员powershell里面用下面命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启用 SSH Agent 服务</span></span><br><span class="line">Set-Service ssh-agent -StartupType Automatic</span><br><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line">Start-Service ssh-agent</span><br><span class="line">Get-Service ssh-agent</span><br><span class="line">ssh-add C:\Users\super\.ssh\id_ed25519</span><br></pre></td></tr></table></figure>
 <p>启动密钥缓存服务,实现免密登录。</p>
-<p><img src="/img/33ef299212f2da171c174f6261e92447.png" alt="alt text"></p>
+<p><img src="/img/33ef299212f2da171c174f6261e92447.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q2">
 
 <p>编辑 .ssh&#x2F;config，加入下面这样的配置项：</p>
@@ -486,7 +505,7 @@
 
 </div>
 
-<p>确认虚拟机ip地址之后进行配置，之后用 <code>ssh vm</code> 进行测试：<br><img src="/img/57a9105e39cdd3362bf7f2ca1a6a95c0.png" alt="alt text"></p>
+<p>确认虚拟机ip地址之后进行配置，之后用 <code>ssh vm</code> 进行测试：<br><img src="/img/57a9105e39cdd3362bf7f2ca1a6a95c0.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q3">
 
 <p>使用 ssh-copy-id vm 把你的 SSH 公钥复制到服务器上。</p>
@@ -498,86 +517,222 @@
 <p>在虚拟机里执行 python -m http.server 8888 启动一个 Web 服务器。然后在你自己的机器上访问 <a href="http://localhost:9999，确认自己能访问虚拟机里的这个服务。">http://localhost:9999，确认自己能访问虚拟机里的这个服务。</a></p>
 </div>
 
-<p>按照命令，可以成功访问：<br><img src="/img/f71accf6cdd3697004cb7c5a4a61f882.png" alt="alt text"></p>
+<p>按照命令，可以成功访问：<br><img src="/img/f71accf6cdd3697004cb7c5a4a61f882.png" alt="alt text" loading='lazy'></p>
 <div class="q-box-badge" data-title="Q5">
 
 <p>运行 sudo vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config 编辑 SSH 服务端配置，把 PasswordAuthentication 改成禁用密码认证，再把 PermitRootLogin 改成禁用 root 登录。然后执行 sudo service sshd restart 重启 ssh 服务，再试着重新 SSH 登录。</p>
 </div>
 
-<p>用 <code>ssh vm</code> 依旧能登录，但是用密码登录和 <code>root</code> 用户直接登录就不行了：<br><img src="/img/360c1efd6ca1aa4cb333ed603f51c70d.png" alt="alt text"></p>
+<p>用 <code>ssh vm</code> 依旧能登录，但是用密码登录和 <code>root</code> 用户直接登录就不行了：<br><img src="/img/360c1efd6ca1aa4cb333ed603f51c70d.png" alt="alt text" loading='lazy'></p>
 <p>这个第二讲又搞了三四天，效率还是太低了，怎么学东西学的这么慢……</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Rhys</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/">http://example.com/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Rhys's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/command-line/">command-line</a><a class="post-meta__tags" href="/tags/missing-semester/">missing semester</a></div><div class="post-share"><div class="social-share" data-image="/img/headhacker.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">missing semester——shell practise</div></div><div class="info-2"><div class="info-item-1">shell？shell！CS基础在向你招手</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-14</div><div class="info-item-2">missing semester——shell practise</div></div><div class="info-2"><div class="info-item-1">shell？shell！CS基础在向你招手</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/headhacker.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Rhys</div><div class="author-info-description">CTF萌新 / 羽毛球爱好者 / ACM入门中</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/rhys-tt"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/rhys-tt" target="_blank" title="Github"><i class="fab fa-github" style="color: #00FFFF;"></i></a><a class="social-icon" href="mailto:linzch25@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的学习基地</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%B8%8E-Globs"><span class="toc-number">1.1.</span> <span class="toc-text">参数与 Globs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.</span> <span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">返回码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">信号与任务控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8E%E6%9D%83%E9%99%90"><span class="toc-number">1.5.</span> <span class="toc-text">文件与权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8%E5%99%A8"><span class="toc-number">1.6.</span> <span class="toc-text">终端复用器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Aliases-%E4%B8%8E-Dotfiles"><span class="toc-number">1.7.</span> <span class="toc-text">Aliases 与 Dotfiles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%9C%BA%E5%99%A8%EF%BC%88SSH%EF%BC%89"><span class="toc-number">1.8.</span> <span class="toc-text">远程机器（SSH）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/" title="missing-semester——command-line practise">missing-semester——command-line practise</a><time datetime="2026-05-18T16:28:35.000Z" title="发表于 2026-05-19 00:28:35">2026-05-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise">missing semester——shell practise</a><time datetime="2026-05-13T17:10:35.000Z" title="发表于 2026-05-14 01:10:35">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/10/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" title="WEB安全基础">WEB安全基础</a><time datetime="2026-05-10T04:34:27.000Z" title="发表于 2026-05-10 12:34:27">2026-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BB%8E%E7%A5%9E%E7%BB%8F%E5%85%83%E7%BB%93%E6%9E%84%E5%88%B0%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/" title="深度学习基础（二）：从神经元结构到模型优化">深度学习基础（二）：从神经元结构到模型优化</a><time datetime="2026-04-16T02:00:00.000Z" title="发表于 2026-04-16 10:00:00">2026-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9ACNN%E6%9E%B6%E6%9E%84%E3%80%81%E6%93%8D%E4%BD%9C%E4%B8%8E%E5%BA%95%E5%B1%82%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" title="深度学习基础：CNN架构、操作与底层数学推导">深度学习基础：CNN架构、操作与底层数学推导</a><time datetime="2026-04-11T02:00:00.000Z" title="发表于 2026-04-11 10:00:00">2026-04-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Rhys</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
-  const loadMathjax = () => {
-    if (!window.MathJax) {
-      window.MathJax = {
-        loader: {
-          load: [
-            // Four font extension packages (optional)
-            //- '[tex]/bbm',
-            //- '[tex]/bboldx',
-            //- '[tex]/dsfont',
-            '[tex]/mhchem'
-          ],
-          paths: {
-            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://rhys-tt.github.io">Rhys</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://rhys-tt.github.io/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/">https://rhys-tt.github.io/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://rhys-tt.github.io" target="_blank">Rhys's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/command-line/">command-line</a><a class="post-meta__tags" href="/tags/missing-semester/">missing semester</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.webp" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">missing semester——shell practise</div></div><div class="info-2"><div class="info-item-1">shell？shell！CS基础在向你招手</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-05-14</div><div class="info-item-2">missing semester——shell practise</div></div><div class="info-2"><div class="info-item-1">shell？shell！CS基础在向你招手</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/ loading='lazy'></div><div class="author-info-name">Rhys</div><div class="author-info-description">CTF萌新 / 羽毛球爱好者 / ACM入门中</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/rhys-tt"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/rhys-tt" target="_blank" title="Github"><i class="fab fa-github" style="color: #00FFFF;"></i></a><a class="social-icon" href="mailto:linzch25@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的学习基地</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%B8%8E-Globs"><span class="toc-number">1.1.</span> <span class="toc-text">参数与 Globs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.</span> <span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">返回码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E4%B8%8E%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">信号与任务控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8E%E6%9D%83%E9%99%90"><span class="toc-number">1.5.</span> <span class="toc-text">文件与权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8%E5%99%A8"><span class="toc-number">1.6.</span> <span class="toc-text">终端复用器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Aliases-%E4%B8%8E-Dotfiles"><span class="toc-number">1.7.</span> <span class="toc-text">Aliases 与 Dotfiles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%9C%BA%E5%99%A8%EF%BC%88SSH%EF%BC%89"><span class="toc-number">1.8.</span> <span class="toc-text">远程机器（SSH）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/19/missing-semester%E2%80%94%E2%80%94command-line%20practise/" title="missing-semester——command-line practise">missing-semester——command-line practise</a><time datetime="2026-05-18T16:28:35.000Z" title="发表于 2026-05-19 00:28:35">2026-05-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/14/missing-semester%E2%80%94%E2%80%94shell%20practise/" title="missing semester——shell practise">missing semester——shell practise</a><time datetime="2026-05-13T17:10:35.000Z" title="发表于 2026-05-14 01:10:35">2026-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/10/WEB%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" title="WEB安全基础">WEB安全基础</a><time datetime="2026-05-10T04:34:27.000Z" title="发表于 2026-05-10 12:34:27">2026-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%EF%BC%9A%E4%BB%8E%E7%A5%9E%E7%BB%8F%E5%85%83%E7%BB%93%E6%9E%84%E5%88%B0%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/" title="深度学习基础（二）：从神经元结构到模型优化">深度学习基础（二）：从神经元结构到模型优化</a><time datetime="2026-04-16T02:00:00.000Z" title="发表于 2026-04-16 10:00:00">2026-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/11/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%EF%BC%9ACNN%E6%9E%B6%E6%9E%84%E3%80%81%E6%93%8D%E4%BD%9C%E4%B8%8E%E5%BA%95%E5%B1%82%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC/" title="深度学习基础：CNN架构、操作与底层数学推导">深度学习基础：CNN架构、操作与底层数学推导</a><time datetime="2026-04-11T02:00:00.000Z" title="发表于 2026-04-11 10:00:00">2026-04-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Rhys</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
 
-            //- // Four font extension packages (optional)
-            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
-            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
-            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
-            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
-          }
-        },
-        output: {
-          font: 'mathjax-newcm',
-        },
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          tags: 'none',
-          packages: {
-            '[+]': [
-              'mhchem'
-            ]
-          }
-        },
-        chtml: {
-          scale: 1.1
-        },
-        options: {
-          enableMenu: true,
-          menuOptions: {
-            settings: {
-              enrich: false  // Turn off Braille and voice narration text automatic generation
-            }
-          },
-          renderActions: {
-            findScript: [10, doc => {
-              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
-                const display = !!node.type.match(/; *mode=display/)
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
-                const text = document.createTextNode('')
-                node.parentNode.replaceChild(text, node)
-                math.start = {node: text, delim: '', n: 0}
-                math.end = {node: text, delim: '', n: 0}
-                doc.math.push(math)
-              }
-            }, '']
-          }
-        }
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://rhys-twikoo.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://rhys-twikoo.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
       }
+    })
+  }
 
-      const script = document.createElement('script')
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@4.1.0/tex-mml-chtml.min.js'
-      script.id = 'MathJax-script'
-      script.async = true
-      document.head.appendChild(script)
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script>window.newestComments = {
+  changeContent: content => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<code>.*?<\/code>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g, "") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0, 150) + '...'
+    }
+    return content
+  },
+
+  generateHtml: (array, ele) => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class="aside-list-item">'
+
+        if (true && array[i].avatar) {
+          const imgAttr = 'src'
+          const lazyloadNative = 'loading="lazy"'
+          result += `<a href="${array[i].url}" class="thumbnail"><img ${imgAttr}="${array[i].avatar}" alt="${array[i].nick}" ${lazyloadNative} loading='lazy'></a>`
+        }
+
+        result += `<div class="content">
+        <a class="comment" href="${array[i].url}" title="${array[i].content}">${array[i].content}</a>
+        <div class="name"><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
     } else {
-      MathJax.startup.document.state(0)
-      MathJax.texReset()
-      MathJax.typesetPromise()
+      result += '暂无评论'
+    }
+
+    ele.innerHTML = result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh(ele)
+  },
+
+  newestCommentInit: (name, getComment) => {
+    const $dom = document.querySelector('#card-newest-comments .aside-list')
+    if ($dom) {
+      const data = btf.saveToLocal.get(name)
+      if (data) {
+        newestComments.generateHtml(JSON.parse(data), $dom)
+      } else {
+        getComment($dom)
+      }
+    }
+  },
+
+  run: (name, getComment) => {
+    newestComments.newestCommentInit(name, getComment)
+    btf.addGlobalFn('pjaxComplete', () => newestComments.newestCommentInit(name, getComment), name)
+  }
+}</script><script>window.addEventListener('load', () => {
+  const keyName = 'twikoo-newest-comments'
+  const { changeContent, generateHtml, run } = window.newestComments
+
+  const getComment = ele => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://rhys-twikoo.netlify.app/.netlify/functions/twikoo',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(res => {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        btf.saveToLocal.set(keyName, JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray, ele)
+      }).catch(err => {
+        console.error(err)
+        ele.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.all.min.js').then(runTwikoo)
     }
   }
 
-  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
-  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
-})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+  run(keyName, getComment)
+})</script><script src="/js/custom.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js" defer="defer"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => {
+      try {
+        fn()
+      } catch (err) {
+        console.debug('Pjax callback failed:', err)
+      }
+    })
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      false
+        ? pjax.loadUrl('/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章标题或正文…" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>
